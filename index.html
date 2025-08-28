@@ -1,380 +1,472 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>IT Solutions — Information Technology Service</title>
-  <meta name="description" content="Слаботочные сети, видеонаблюдение, системы безопасности, умный дом, обслуживание IT-оборудования в Алматы." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg:#0b0f14;         /* глубокий тёмный, технологичный фон */
-      --panel:#101621;      /* панели/карточки */
-      --muted:#9fb0c3;      /* вторичный текст */
-      --text:#e6f0ff;       /* основной текст */
-      --accent:#37b6ff;     /* акцент (бирюзово-синий) */
-      --accent-2:#7effa0;   /* дополнительный акцент */
-      --radius:18px;
-      --gap:18px;
-      --shadow:0 10px 30px rgba(0,0,0,.35);
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      color:var(--text); background:radial-gradient(1200px 600px at 80% -10%, rgba(55,182,255,.15), transparent 60%),
-                         radial-gradient(800px 400px at -10% 10%, rgba(126,255,160,.12), transparent 60%),
-                         var(--bg);
-    }
-    a{color:var(--accent); text-decoration:none}
-    a:hover{opacity:.9}
-
-    /* Header */
-    header{
-      position:sticky; top:0; z-index:50;
-      backdrop-filter:saturate(140%) blur(8px);
-      background:linear-gradient(180deg, rgba(16,22,33,.9), rgba(16,22,33,.65));
-      border-bottom:1px solid rgba(255,255,255,.06);
-    }
-    .wrap{max-width:1180px; margin:0 auto; padding:0 16px}
-    .row{display:flex; align-items:center; justify-content:space-between}
-    .brand{display:flex; align-items:center; gap:12px; padding:14px 0}
-    .brand svg{width:34px; height:34px}
-    .brand b{font-size:18px; letter-spacing:.3px}
-    nav{display:flex; gap:14px; align-items:center}
-    .nav-link{padding:10px 12px; border-radius:12px; color:var(--muted)}
-    .nav-link:hover{color:var(--text); background:rgba(255,255,255,.04)}
-    .lang{display:flex; gap:6px; padding:4px; border-radius:999px; background:rgba(255,255,255,.05)}
-    .lang button{border:0; background:transparent; color:var(--muted); padding:8px 12px; border-radius:999px; cursor:pointer}
-    .lang button.active{background:var(--accent); color:#00131f; font-weight:700}
-
-    /* Hero */
-    .hero{padding:72px 0 42px}
-    .hero-grid{display:grid; grid-template-columns:1.2fr .8fr; gap:28px; align-items:center}
-    .h1{font-size:42px; line-height:1.15; margin:0 0 14px}
-    .lead{color:var(--muted); font-size:18px; margin:0 0 24px}
-    .cta{display:flex; gap:12px; flex-wrap:wrap}
-    .btn{appearance:none; border:0; cursor:pointer; padding:14px 18px; border-radius:14px; font-weight:700}
-    .btn-primary{background:var(--accent); color:#00131f; box-shadow:0 8px 22px rgba(55,182,255,.25)}
-    .btn-ghost{background:rgba(255,255,255,.06); color:var(--text)}
-    .hero-card{background:linear-gradient(180deg, rgba(55,182,255,.08), rgba(126,255,160,.08));
-               border:1px solid rgba(255,255,255,.08); border-radius:var(--radius); padding:22px; box-shadow:var(--shadow)}
-    .badges{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
-    .badge{padding:6px 10px; border-radius:999px; font-size:12px; color:#00131f; background:var(--accent-2)}
-
-    /* Sections */
-    section{padding:42px 0}
-    .section-title{font-size:26px; margin:0 0 18px}
-    .muted{color:var(--muted)}
-
-    /* Services */
-    .cards{display:grid; grid-template-columns:repeat(3, 1fr); gap:var(--gap)}
-    .card{background:var(--panel); border:1px solid rgba(255,255,255,.06); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow); transition:transform .2s ease}
-    .card:hover{transform:translateY(-3px)}
-    .card h3{margin:10px 0 6px; font-size:18px}
-    .card p{margin:0; color:var(--muted)}
-    .ico{width:28px; height:28px}
-
-    /* Contact */
-    .contact-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:var(--gap)}
-    .panel{background:var(--panel); border:1px solid rgba(255,255,255,.06); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow)}
-    .list{display:grid; gap:10px}
-    .list a{display:inline-flex; gap:8px; align-items:center}
-    form{display:grid; gap:12px}
-    input, textarea{width:100%; padding:12px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.12); background:#0e141e; color:var(--text)}
-
-    footer{padding:26px 0 40px; color:var(--muted); border-top:1px solid rgba(255,255,255,.06)}
-
-    /* Responsive */
-    @media (max-width: 980px){ .hero-grid, .cards, .contact-grid{grid-template-columns:1fr} .h1{font-size:34px} }
-  </style>
-</head>
-<body>
-  <header>
-    <div class="wrap row">
-      <a class="brand" href="#top" aria-label="IT Solutions logo">
-        <!-- LOGO Variant A (минималистичный узел-сеть) -->
-        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <defs>
-            <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#37b6ff"/>
-              <stop offset="100%" stop-color="#7effa0"/>
-            </linearGradient>
-          </defs>
-          <circle cx="12" cy="32" r="6" stroke="url(#g)" stroke-width="3"/>
-          <circle cx="52" cy="16" r="6" stroke="url(#g)" stroke-width="3"/>
-          <circle cx="52" cy="48" r="6" stroke="url(#g)" stroke-width="3"/>
-          <path d="M18 32 L46 18 M18 32 L46 46" stroke="url(#g)" stroke-width="3" stroke-linecap="round"/>
-        </svg>
-        <b>IT Solutions</b>
-      </a>
-      <nav>
-        <a class="nav-link" href="#services" data-i18n="nav.services">Услуги</a>
-        <a class="nav-link" href="#about" data-i18n="nav.about">О компании</a>
-        <a class="nav-link" href="#contact" data-i18n="nav.contact">Контакты</a>
-        <div class="lang" role="group" aria-label="Language switcher">
-          <button class="active" data-lang="ru">RU</button>
-          <button data-lang="kk">KZ</button>
-          <button data-lang="en">EN</button>
-        </div>
-      </nav>
-    </div>
-  </header>
-
-  <main id="top" class="wrap">
-    <!-- Hero -->
-    <section class="hero">
-      <div class="hero-grid">
-        <div>
-          <h1 class="h1" data-i18n="hero.title">Комплексные IT‑решения для вашего бизнеса и дома</h1>
-          <p class="lead" data-i18n="hero.lead">Слаботочные сети • Видеонаблюдение • Системы безопасности • Умный дом • Обслуживание IT‑оборудования</p>
-          <div class="cta">
-            <a href="#contact" class="btn btn-primary" data-i18n="hero.cta">Связаться с нами</a>
-            <a href="#services" class="btn btn-ghost" data-i18n="hero.secondary">Наши услуги</a>
-          </div>
-          <div class="badges">
-            <span class="badge" data-i18n="hero.badge1">Алматы, Казахстан</span>
-            <span class="badge" data-i18n="hero.badge2">Information Technology Service</span>
-          </div>
-        </div>
-        <div class="hero-card">
-          <h3 style="margin-top:0" data-i18n="hero.cardTitle">Надёжность, скорость, безопасность</h3>
-          <p class="muted" data-i18n="hero.cardText">Проектируем, внедряем и поддерживаем инфраструктуру: от СКС и видеонаблюдения до умного дома и IT‑аутсорсинга.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Services -->
-    <section id="services">
-      <h2 class="section-title" data-i18n="services.title">Наши услуги</h2>
-      <p class="muted" data-i18n="services.subtitle">Ключевые направления, в которых мы помогаем клиентам каждый день</p>
-
-      <div class="cards">
-        <article class="card">
-          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 7h20M2 12h20M2 17h20"/><circle cx="6" cy="7" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="18" cy="17" r="1"/></svg>
-          <h3 data-i18n="services.lvs.title">Слаботочные сети</h3>
-          <p data-i18n="services.lvs.text">Проектирование и монтаж СКС, Wi‑Fi, телефонии и инженерных коммуникаций.</p>
-        </article>
-        <article class="card">
-          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
-          <h3 data-i18n="services.cctv.title">Видеонаблюдение</h3>
-          <p data-i18n="services.cctv.text">Подбор камер и запись, удалённый доступ, аналитика и хранение данных.</p>
-        </article>
-        <article class="card">
-          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          <h3 data-i18n="services.security.title">Системы безопасности</h3>
-          <p data-i18n="services.security.text">Охранная/пожарная сигнализация, контроль доступа, интеграция с CCTV.</p>
-        </article>
-        <article class="card">
-          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V6a3 3 0 0 1 6 0v12"/><path d="M5 10h14"/><path d="M7 14h10"/></svg>
-          <h3 data-i18n="services.smarthome.title">Умный дом</h3>
-          <p data-i18n="services.smarthome.text">Автоматизация освещения, климата и безопасности. Управление со смартфона.</p>
-        </article>
-        <article class="card">
-          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16"/><path d="M12 4v16"/></svg>
-          <h3 data-i18n="services.it.title">Обслуживание IT‑оборудования</h3>
-          <p data-i18n="services.it.text">Поддержка рабочих мест, серверов и сетей. SLA и мониторинг.</p>
-        </article>
-        <article class="card">
-          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M8 21h8"/></svg>
-          <h3 data-i18n="services.extra.title">Проектирование и аудит</h3>
-          <p data-i18n="services.extra.text">Технико‑экономическое обоснование, сметы, аудит существующих систем.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- About -->
-    <section id="about">
-      <h2 class="section-title" data-i18n="about.title">О компании</h2>
-      <p class="muted" data-i18n="about.text">
-        IT Solutions (Information Technology Service) — команда специалистов из Алматы.
-        Мы проектируем, внедряем и сопровождаем решения в области связи, безопасности
-        и автоматизации для бизнеса и дома. Наша цель — надежная инфраструктура,
-        удобное управление и высокая безопасность.
-      </p>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact">
-      <h2 class="section-title" data-i18n="contact.title">Контакты</h2>
-      <div class="contact-grid">
-        <div class="panel">
-          <h3 style="margin-top:0" data-i18n="contact.reach">Связаться с нами</h3>
-          <div class="list">
-            <div>🇰🇿 <span class="muted" data-i18n="contact.locationLabel">Местоположение:</span> <b data-i18n="contact.location">Казахстан, г. Алматы</b></div>
-            <div>📞 <span class="muted">Tel:</span> <a href="tel:+77783490149">+7 778 349 01 49</a></div>
-            <div>✉️ <span class="muted">Email:</span> <a href="mailto:taras.ttv@gmail.com">taras.ttv@gmail.com</a></div>
-          </div>
-        </div>
-        <div class="panel">
-          <h3 style="margin-top:0" data-i18n="contact.formTitle">Быстрая заявка</h3>
-          <form onsubmit="return sendMailto(event)">
-            <input required name="name" placeholder="Ваше имя" data-i18n-placeholder="contact.form.name" />
-            <input required type="email" name="email" placeholder="Ваш email" data-i18n-placeholder="contact.form.email" />
-            <textarea required name="msg" rows="5" placeholder="Кратко опишите задачу" data-i18n-placeholder="contact.form.msg"></textarea>
-            <button class="btn btn-primary" type="submit" data-i18n="contact.form.send">Отправить</button>
-          </form>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="wrap row" style="gap:12px; flex-wrap:wrap">
-      <div>© <span id="year"></span> IT Solutions — <span class="muted">Information Technology Service</span></div>
-      <div class="muted">RU | KZ | EN</div>
-    </div>
-  </footer>
-
-  <!-- JSON‑LD (LocalBusiness) -->
+  <title>IT Solutions — СКС, видеонаблюдение, умный дом, IT‑аутсорсинг (Алматы)</title>
+  <meta name="description" content="Проектирование, внедрение и поддержка инфраструктуры: СКС, видеонаблюдение, системы безопасности, умный дом, IT‑аутсорсинг. Алматы и область. Бесплатный аудит."/>
+  <meta name="theme-color" content="#0F172A"/>
+  <!-- Open Graph -->
+  <meta property="og:title" content="IT Solutions — инфраструктура под ключ"/>
+  <meta property="og:description" content="СКС, видеонаблюдение, умный дом, IT‑аутсорсинг. Алматы и область."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://infotechsolutions.netlify.app/"/>
+  <meta property="og:image" content="/og-preview.png"/>
+  <!-- JSON‑LD -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "name": "IT Solutions",
-    "description": "Low‑voltage networks, CCTV, security systems, smart home, IT maintenance in Almaty.",
-    "address": {"@type": "PostalAddress", "addressLocality": "Almaty", "addressCountry": "KZ"},
-    "telephone": "+77783490149",
-    "email": "taras.ttv@gmail.com"
+    "name": "IT Solutions (Information Technology Service)",
+    "address": {"@type": "PostalAddress", "addressLocality": "Алматы", "addressCountry": "KZ"},
+    "telephone": "+7 778 349 01 49",
+    "email": "taras.ttv@gmail.com",
+    "url": "https://infotechsolutions.netlify.app/",
+    "areaServed": ["Алматы", "Алматинская область"],
+    "sameAs": ["https://2gis.kz/almaty"],
+    "priceRange": "₸₸",
+    "openingHours": "Mo-Sa 09:00-20:00"
   }
   </script>
+  <!-- Tailwind Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { brand: { primary: '#37b6ff', accent: '#7effa0' } }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji"; }
+    .glass { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(10px); }
+    .nav-link { opacity: .85; }
+    .nav-link:hover { opacity: 1; }
+    .shadow-soft { box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100">
+  <!-- Header -->
+  <header class="sticky top-0 z-50 glass">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+      <a href="#" class="text-xl font-extrabold tracking-tight">IT Solutions</a>
+      <nav class="hidden md:flex items-center gap-6 text-sm">
+        <a href="#services" class="nav-link">Услуги</a>
+        <a href="#cases" class="nav-link">Кейсы</a>
+        <a href="#calculator" class="nav-link">Калькулятор</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+        <a href="#contact" class="nav-link">Контакты</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <button id="langBtn" class="text-xs border border-white/20 px-2 py-1 rounded-full">RU</button>
+        <a href="#lead" class="bg-brand-primary hover:opacity-90 text-slate-900 font-semibold px-4 py-2 rounded-xl">Оставить заявку</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="absolute -top-24 -right-24 w-[600px] h-[600px] rounded-full bg-brand-primary/10 blur-3xl"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 grid md:grid-cols-2 items-center gap-10">
+      <div>
+        <h1 class="text-3xl md:text-5xl font-extrabold leading-tight">Комплексные IT‑решения для бизнеса и дома</h1>
+        <p class="mt-5 text-slate-300">СКС • Видеонаблюдение • Системы безопасности • Умный дом • IT‑аутсорсинг. <span class="font-semibold">Алматы и область.</span></p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#calculator" class="px-5 py-3 rounded-xl bg-white text-slate-900 font-semibold shadow-soft">Рассчитать проект</a>
+          <a href="#services" class="px-5 py-3 rounded-xl border border-white/20">Наши услуги</a>
+        </div>
+        <div class="mt-6 text-xs text-slate-400">Ответ в течение 15 минут в рабочее время. Бесплатный первичный аудит.</div>
+      </div>
+      <div class="relative">
+        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1600&auto=format&fit=crop" alt="Server room" class="rounded-3xl shadow-soft ring-1 ring-white/10"/>
+        <div class="absolute -bottom-4 -left-4 bg-slate-800/80 border border-white/10 rounded-2xl p-4 text-sm">
+          <div class="font-semibold">SLA‑поддержка 24/7</div>
+          <div class="text-slate-400">Мониторинг, удалённый доступ, выезд инженера</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust badges / quick facts -->
+  <section class="border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      <div>
+        <div class="text-3xl font-extrabold">10+</div>
+        <div class="text-slate-400 text-sm">лет опыта</div>
+      </div>
+      <div>
+        <div class="text-3xl font-extrabold">100+</div>
+        <div class="text-slate-400 text-sm">завершённых проектов</div>
+      </div>
+      <div>
+        <div class="text-3xl font-extrabold">24/7</div>
+        <div class="text-slate-400 text-sm">поддержка</div>
+      </div>
+      <div>
+        <div class="text-3xl font-extrabold">SLA</div>
+        <div class="text-slate-400 text-sm">с понятными KPI</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <h2 class="text-2xl md:text-3xl font-extrabold">Наши услуги</h2>
+      <p class="mt-2 text-slate-300">Проектируем, внедряем и поддерживаем инфраструктуру под ключ.</p>
+      <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Card: СКС -->
+        <article class="rounded-2xl border border-white/10 p-6 bg-white/5">
+          <h3 class="font-bold text-lg">Слаботочные сети (СКС)</h3>
+          <p class="text-slate-300 text-sm mt-2">Проектирование, монтаж, сертификация. Wi‑Fi, телефония, серверные.</p>
+          <ul class="mt-3 text-sm list-disc list-inside text-slate-300">
+            <li>Аудит и схема коммутации</li>
+            <li>Маркировка и документация</li>
+            <li>Гарантия до 5 лет</li>
+          </ul>
+          <a href="#lead" class="inline-block mt-4 text-brand-accent">Получить смету →</a>
+        </article>
+        <!-- Card: Видеонаблюдение -->
+        <article class="rounded-2xl border border-white/10 p-6 bg-white/5">
+          <h3 class="font-bold text-lg">Видеонаблюдение и безопасность</h3>
+          <p class="text-slate-300 text-sm mt-2">IP‑камеры, NVR, аналитика. Интеграция с СКУД и пожарной.</p>
+          <ul class="mt-3 text-sm list-disc list-inside text-slate-300">
+            <li>Удалённый доступ и запись</li>
+            <li>Хранение 7–90 дней</li>
+            <li>Голосовая и push‑сигнализация</li>
+          </ul>
+          <a href="#calculator" class="inline-block mt-4 text-brand-accent">Рассчитать комплект →</a>
+        </article>
+        <!-- Card: Умный дом -->
+        <article class="rounded-2xl border border-white/10 p-6 bg-white/5">
+          <h3 class="font-bold text-lg">Умный дом</h3>
+          <p class="text-slate-300 text-sm mt-2">Освещение, климат, безопасность. Управление со смартфона.</p>
+          <ul class="mt-3 text-sm list-disc list-inside text-slate-300">
+            <li>Сценарии и датчики</li>
+            <li>Интеграция с камерой/СКУД</li>
+            <li>Смета за 24 часа</li>
+          </ul>
+          <a href="#calculator" class="inline-block mt-4 text-brand-accent">Оценить бюджет →</a>
+        </article>
+        <!-- Card: Аутсорсинг -->
+        <article class="rounded-2xl border border-white/10 p-6 bg-white/5">
+          <h3 class="font-bold text-lg">IT‑аутсорсинг</h3>
+          <p class="text-slate-300 text-sm mt-2">Поддержка рабочих мест, серверов и сетей по SLA.</p>
+          <ul class="mt-3 text-sm list-disc list-inside text-slate-300">
+            <li>Абонентка от 100 тыс. ₸</li>
+            <li>Мониторинг и Help Desk</li>
+            <li>Выезд инженера</li>
+          </ul>
+          <a href="#lead" class="inline-block mt-4 text-brand-accent">Запросить КП →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cases -->
+  <section id="cases" class="border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <h2 class="text-2xl md:text-3xl font-extrabold">Кейсы</h2>
+      <div class="mt-8 grid md:grid-cols-2 gap-6">
+        <div class="rounded-2xl overflow-hidden border border-white/10">
+          <img src="https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=1200&auto=format&fit=crop" alt="rack"/>
+          <div class="p-6">
+            <div class="font-semibold">Сеть и видеонаблюдение для офиса (50+ сотрудников)</div>
+            <p class="text-sm text-slate-300 mt-2">Спроектировали СКС, настроили Wi‑Fi, установили 24 IP‑камеры. Сократили простои на 60%. Поддержка по SLA.</p>
+          </div>
+        </div>
+        <div class="rounded-2xl overflow-hidden border border-white/10">
+          <img src="https://images.unsplash.com/photo-1633265486064-086b219458ec?q=80&w=1200&auto=format&fit=crop" alt="smart home"/>
+          <div class="p-6">
+            <div class="font-semibold">Умный дом в коттедже (350 м²)</div>
+            <p class="text-sm text-slate-300 mt-2">Освещение, климат, датчики безопасности, доступ через приложение. Экономия электроэнергии ~18%.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Calculator -->
+  <section id="calculator" class="border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <h2 class="text-2xl md:text-3xl font-extrabold">Калькулятор бюджета</h2>
+      <p class="mt-2 text-slate-300">Оцените ориентировочную стоимость за 1–2 минуты. Точную смету пришлём после бесплатного аудита.</p>
+
+      <div class="mt-8 grid lg:grid-cols-2 gap-8">
+        <!-- Form -->
+        <div class="rounded-2xl border border-white/10 p-6 bg-white/5">
+          <label class="block text-sm text-slate-300">Направление</label>
+          <select id="svc" class="mt-1 w-full bg-slate-800 border border-white/10 rounded-xl p-3">
+            <option value="cctv">Видеонаблюдение</option>
+            <option value="sks">СКС</option>
+            <option value="smarthome">Умный дом</option>
+            <option value="outsourcing">IT‑аутсорсинг</option>
+          </select>
+
+          <!-- CCTV inputs -->
+          <div id="cctvInputs" class="mt-4 space-y-4">
+            <div>
+              <label class="block text-sm">Количество камер</label>
+              <input type="number" id="cctvCams" min="1" value="8" class="mt-1 w-full bg-slate-800 border border-white/10 rounded-xl p-3"/>
+            </div>
+            <div>
+              <label class="block text-sm">Срок хранения (дней)</label>
+              <input type="number" id="cctvDays" min="7" value="30" class="mt-1 w-full bg-slate-800 border border-white/10 rounded-xl p-3"/>
+            </div>
+            <div>
+              <label class="block text-sm">Качество</label>
+              <select id="cctvQuality" class="mt-1 w-full bg-slate-800 border border-white/10 rounded-xl p-3">
+                <option value="base">Базовое (2MP)</option>
+                <option value="mid">Оптимум (4MP)</option>
+                <option value="pro">Премиум (8MP)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- SKS inputs -->
+          <div id="sksInputs" class="mt-4 space-y-4 hidden">
+            <div>
+              <label class="block text-sm">Количество точек (розеток)</label>
+              <input type="number" id="sksPoints" min="4" value="20" class="mt-1 w-full bg-slate-800 border border-white/10 rounded-xl p-3"/>
+            </div>
+            <div>
+              <label class="block text-sm">Длина трасс, м (среднее)</label>
+              <input type="number" id="sksLen" min="5" value="25" class="mt-1 w-full bg-slate-800 border border-white/10 rounded-xl p-3"/>
+            </div>
+          </div>
+
+          <!-- SmartHome inputs -->
+          <div id="smarthomeInputs" class="mt-4 space-y-4 hidden">
+            <div>
+              <label class="block text-sm">Площадь объекта, м²</label>
+              <input type="number" id="smhArea" min="30" value="120" class="mt-1 w-full bg-slate-800 border border-white/10 rounded-xl p-3"/>
+            </div>
+            <div>
+              <label class="block text-sm">Количество сценариев</label>
+              <input type="number" id="smhScenes" min="3" value="10" class="mt-1 w-full bg-slate-800 border border-white/10 rounded-xl p-3"/>
+            </div>
+          </div>
+
+          <!-- Outsourcing inputs -->
+          <div id="outsourcingInputs" class="mt-4 space-y-4 hidden">
+            <div>
+              <label class="block text-sm">Кол-во сотрудников</label>
+              <input type="number" id="outPeople" min="5" value="25" class="mt-1 w-full bg-slate-800 border border-white/10 rounded-xl p-3"/>
+            </div>
+            <div>
+              <label class="block text-sm">Критичность</label>
+              <select id="outSla" class="mt-1 w-full bg-slate-800 border border-white/10 rounded-xl p-3">
+                <option value="std">Стандарт (9×5)</option>
+                <option value="plus">Plus (12×6)</option>
+                <option value="pro">PRO (24×7)</option>
+              </select>
+            </div>
+          </div>
+
+          <button id="calcBtn" class="mt-6 w-full bg-brand-primary text-slate-900 font-semibold py-3 rounded-xl">Рассчитать</button>
+        </div>
+
+        <!-- Output -->
+        <div class="rounded-2xl border border-white/10 p-6 bg-white/5">
+          <div class="text-sm text-slate-300">Ориентировочная стоимость</div>
+          <div id="calcPrice" class="mt-2 text-4xl font-extrabold">—</div>
+          <div id="calcDetails" class="mt-4 text-sm text-slate-300 space-y-2"></div>
+          <div class="mt-6 p-4 rounded-xl bg-slate-800/70 border border-white/10 text-sm">
+            Итог не является офертой. После бесплатного выезда инженера пришлём точную смету в течение 24 часов.
+          </div>
+
+          <!-- Netlify lead form -->
+          <form name="calc-lead" method="POST" data-netlify="true" class="mt-6 grid gap-3" netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="calc-lead" />
+            <p class="hidden"><label>Don’t fill this out: <input name="bot-field" /></label></p>
+            <input required class="bg-slate-800 border border-white/10 rounded-xl p-3" name="name" placeholder="Ваше имя" />
+            <input required class="bg-slate-800 border border-white/10 rounded-xl p-3" name="phone" placeholder="Телефон" />
+            <input class="bg-slate-800 border border-white/10 rounded-xl p-3" name="email" placeholder="E‑mail (необязательно)" />
+            <textarea class="bg-slate-800 border border-white/10 rounded-xl p-3" name="comment" placeholder="Комментарий"></textarea>
+            <input type="hidden" id="calcPayload" name="calc_payload" />
+            <button class="bg-brand-accent text-slate-900 font-semibold py-3 rounded-xl">Отправить расчёт</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lead form section -->
+  <section id="lead" class="border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="grid lg:grid-cols-2 gap-8 items-center">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-extrabold">Бесплатный аудит инфраструктуры</h2>
+          <p class="mt-2 text-slate-300">Проверим сеть, камеры, серверную и подготовим рекомендации с бюджетом.
+          </p>
+          <ul class="mt-4 text-slate-300 list-disc list-inside text-sm space-y-1">
+            <li>Выезд инженера в день обращения</li>
+            <li>Письменный отчёт и КП в течение 24 часов</li>
+            <li>Гарантия и SLA‑поддержка</li>
+          </ul>
+        </div>
+        <form name="quick-lead" method="POST" data-netlify="true" class="rounded-2xl border border-white/10 p-6 bg-white/5 grid gap-3" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="quick-lead" />
+          <p class="hidden"><label>Don’t fill this out: <input name="bot-field" /></label></p>
+          <input required class="bg-slate-800 border border-white/10 rounded-xl p-3" name="name" placeholder="Ваше имя" />
+          <input required class="bg-slate-800 border border-white/10 rounded-xl p-3" name="phone" placeholder="Телефон" />
+          <select name="service" class="bg-slate-800 border border-white/10 rounded-xl p-3">
+            <option>Видеонаблюдение</option>
+            <option>СКС</option>
+            <option>Умный дом</option>
+            <option>IT‑аутсорсинг</option>
+          </select>
+          <textarea class="bg-slate-800 border border-white/10 rounded-xl p-3" name="message" placeholder="Кратко опишите задачу"></textarea>
+          <button class="bg-brand-primary text-slate-900 font-semibold py-3 rounded-xl">Отправить заявку</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <h2 class="text-2xl md:text-3xl font-extrabold">Частые вопросы</h2>
+      <div class="mt-6 divide-y divide-white/10">
+        <details class="py-4">
+          <summary class="cursor-pointer font-semibold">Сколько хранится видеоархив?</summary>
+          <p class="mt-2 text-slate-300">Стандартно 7–30 дней. Подберём диски под ваш регламент (до 180 дней).</p>
+        </details>
+        <details class="py-4">
+          <summary class="cursor-pointer font-semibold">Можно ли интегрировать доступ по картам/Face ID?</summary>
+          <p class="mt-2 text-slate-300">Да, интегрируем СКУД с видеонаблюдением и журналами событий.</p>
+        </details>
+        <details class="py-4">
+          <summary class="cursor-pointer font-semibold">Как быстро выезжает инженер?</summary>
+          <p class="mt-2 text-slate-300">По Алматы — в день обращения, по области — на следующий день.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacts -->
+  <section id="contact" class="border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <h2 class="text-2xl md:text-3xl font-extrabold">Контакты</h2>
+      <div class="mt-4 grid md:grid-cols-3 gap-6 text-sm">
+        <div class="rounded-2xl border border-white/10 p-6 bg-white/5">
+          <div class="text-slate-300">Телефон</div>
+          <div class="font-semibold mt-1"><a href="tel:+77783490149">+7 778 349 01 49</a></div>
+        </div>
+        <div class="rounded-2xl border border-white/10 p-6 bg-white/5">
+          <div class="text-slate-300">Email</div>
+          <div class="font-semibold mt-1"><a href="mailto:taras.ttv@gmail.com">taras.ttv@gmail.com</a></div>
+        </div>
+        <div class="rounded-2xl border border-white/10 p-6 bg-white/5">
+          <div class="text-slate-300">Локация</div>
+          <div class="font-semibold mt-1">Алматы, Казахстан</div>
+        </div>
+      </div>
+      <div class="mt-8 text-xs text-slate-400">© IT Solutions — Information Technology Service</div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/10 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between text-xs text-slate-400">
+      <div>RU | KZ | EN (в разработке)</div>
+      <a href="#" class="hover:text-white">Политика конфиденциальности</a>
+    </div>
+  </footer>
 
   <script>
-    // ——— 1) Год в подвале
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // ——— 2) Плавный скролл для якорей
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click', e=>{
-        const id = a.getAttribute('href');
-        if(id.length>1){ e.preventDefault(); document.querySelector(id).scrollIntoView({behavior:'smooth'}); }
-      });
+    // Simple i18n placeholder (extensible later)
+    document.getElementById('langBtn').addEventListener('click', () => {
+      alert('KZ/EN версии будут подключены по запросу — структура уже готова.');
     });
 
-    // ——— 3) Mailto-форма без бэкенда
-    function sendMailto(e){
-      e.preventDefault();
-      const f = e.target;
-      const name = encodeURIComponent(f.name.value.trim());
-      const email = encodeURIComponent(f.email.value.trim());
-      const msg = encodeURIComponent(f.msg.value.trim());
-      const subject = encodeURIComponent(i18n[current].mail.subject);
-      const body = encodeURIComponent(`${i18n[current].mail.from}: ${name} <${decodeURIComponent(email)}>%0D%0A${i18n[current].mail.req}: ${decodeURIComponent(msg)}`);
-      window.location.href = `mailto:taras.ttv@gmail.com?subject=${subject}&body=${body}`;
-      f.reset();
-      return false;
-    }
-
-    // ——— 4) i18n (RU / KK / EN)
-    const i18n = {
-      ru:{
-        'nav.services':'Услуги','nav.about':'О компании','nav.contact':'Контакты',
-        'hero.title':'Комплексные IT‑решения для вашего бизнеса и дома',
-        'hero.lead':'Слаботочные сети • Видеонаблюдение • Системы безопасности • Умный дом • Обслуживание IT‑оборудования',
-        'hero.cta':'Связаться с нами','hero.secondary':'Наши услуги','hero.badge1':'Алматы, Казахстан','hero.badge2':'Information Technology Service',
-        'hero.cardTitle':'Надёжность, скорость, безопасность',
-        'hero.cardText':'Проектируем, внедряем и поддерживаем инфраструктуру: от СКС и видеонаблюдения до умного дома и IT‑аутсорсинга.',
-        'services.title':'Наши услуги','services.subtitle':'Ключевые направления, в которых мы помогаем клиентам каждый день',
-        'services.lvs.title':'Слаботочные сети','services.lvs.text':'Проектирование и монтаж СКС, Wi‑Fi, телефонии и инженерных коммуникаций.',
-        'services.cctv.title':'Видеонаблюдение','services.cctv.text':'Подбор камер и запись, удалённый доступ, аналитика и хранение данных.',
-        'services.security.title':'Системы безопасности','services.security.text':'Охранная/пожарная сигнализация, контроль доступа, интеграция с CCTV.',
-        'services.smarthome.title':'Умный дом','services.smarthome.text':'Автоматизация освещения, климата и безопасности. Управление со смартфона.',
-        'services.it.title':'Обслуживание IT‑оборудования','services.it.text':'Поддержка рабочих мест, серверов и сетей. SLA и мониторинг.',
-        'services.extra.title':'Проектирование и аудит','services.extra.text':'Технико‑экономическое обоснование, сметы, аудит существующих систем.',
-        'about.title':'О компании',
-        'about.text':'IT Solutions (Information Technology Service) — команда специалистов из Алматы. Мы проектируем, внедряем и сопровождаем решения в области связи, безопасности и автоматизации для бизнеса и дома. Наша цель — надежная инфраструктура, удобное управление и высокая безопасность.',
-        'contact.title':'Контакты','contact.reach':'Связаться с нами','contact.locationLabel':'Местоположение:','contact.location':'Казахстан, г. Алматы',
-        'contact.formTitle':'Быстрая заявка',
-        'contact.form.name':'Ваше имя','contact.form.email':'Ваш email','contact.form.msg':'Кратко опишите задачу','contact.form.send':'Отправить',
-        mail:{subject:'Заявка с сайта IT Solutions', from:'От', req:'Задача'}
-      },
-      kk:{
-        'nav.services':'Қызметтер','nav.about':'Компания жайлы','nav.contact':'Байланыс',
-        'hero.title':'Сіздің бизнесіңізге және үйіңізге арналған IT‑шешімдер',
-        'hero.lead':'Әлсіз ток желілері • Бейнебақылау • Қауіпсіздік жүйелері • Ақылды үй • IT жабдықтарына қызмет көрсету',
-        'hero.cta':'Хабарласу','hero.secondary':'Қызметтеріміз','hero.badge1':'Алматы, Қазақстан','hero.badge2':'Information Technology Service',
-        'hero.cardTitle':'Сенімділік, жылдамдық, қауіпсіздік',
-        'hero.cardText':'CKC және бейнебақылаудан бастап, ақылды үй мен IT аутсорсингіне дейін инфрақұрылымды жобалаймыз және қолдаймыз.',
-        'services.title':'Қызметтеріміз','services.subtitle':'Клиенттерге күн сайын көмектесетін негізгі бағыттар',
-        'services.lvs.title':'Әлсіз ток желілері','services.lvs.text':'СКС, Wi‑Fi, телефония және инженерлік коммуникацияларды жобалау және монтаждау.',
-        'services.cctv.title':'Бейнебақылау','services.cctv.text':'Камераларды таңдау, жазу, қашықтан қол жеткізу, талдау және деректерді сақтау.',
-        'services.security.title':'Қауіпсіздік жүйелері','services.security.text':'Күзет/өрт дабылы, қолжетімділікті бақылау, CCTV‑мен біріктіру.',
-        'services.smarthome.title':'Ақылды үй','services.smarthome.text':'Жарық, климат және қауіпсіздікті автоматтандыру. Смартфоннан басқару.',
-        'services.it.title':'IT жабдықтарына қызмет','services.it.text':'Жұмыс орындары, серверлер және желілерді қолдау. SLA және мониторинг.',
-        'services.extra.title':'Жобалау және аудит','services.extra.text':'ТЭН, сметалар, қолданыстағы жүйелердің аудиті.',
-        'about.title':'Компания жайлы',
-        'about.text':'IT Solutions (Information Technology Service) — Алматыдағы мамандар тобы. Біз бизнес пен үйге арналған байланыс, қауіпсіздік және автоматтандыру шешімдерін жобалап, енгізіп, сүйемелдейміз. Мақсатымыз — сенімді инфрақұрылым, ыңғайлы басқару және жоғары қауіпсіздік.',
-        'contact.title':'Байланыс','contact.reach':'Бізбен байланысыңыз','contact.locationLabel':'Орналасуы:','contact.location':'Қазақстан, Алматы қ.',
-        'contact.formTitle':'Жылдам өтінім',
-        'contact.form.name':'Атыңыз','contact.form.email':'Email','contact.form.msg':'Тапсырманы қысқаша жазыңыз','contact.form.send':'Жіберу',
-        mail:{subject:'IT Solutions сайтынан өтінім', from:'Кімнен', req:'Тапсырма'}
-      },
-      en:{
-        'nav.services':'Services','nav.about':'About','nav.contact':'Contacts',
-        'hero.title':'End‑to‑end IT solutions for your business and home',
-        'hero.lead':'Low‑voltage networks • Video surveillance • Security systems • Smart Home • IT equipment maintenance',
-        'hero.cta':'Contact us','hero.secondary':'Our services','hero.badge1':'Almaty, Kazakhstan','hero.badge2':'Information Technology Service',
-        'hero.cardTitle':'Reliability. Speed. Security.',
-        'hero.cardText':'We design, deploy and support infrastructure: from SCS & CCTV to Smart Home and IT outsourcing.',
-        'services.title':'Our services','services.subtitle':'Key areas where we help clients every day',
-        'services.lvs.title':'Low‑voltage networks','services.lvs.text':'Design & installation of SCS, Wi‑Fi, telephony and engineering communications.',
-        'services.cctv.title':'Video surveillance','services.cctv.text':'Camera selection/recording, remote access, analytics and data storage.',
-        'services.security.title':'Security systems','services.security.text':'Intrusion/fire alarm, access control, CCTV integration.',
-        'services.smarthome.title':'Smart Home','services.smarthome.text':'Automation of lighting, climate and safety. Control from a smartphone.',
-        'services.it.title':'IT maintenance','services.it.text':'Workstations, servers and networks support. SLA and monitoring.',
-        'services.extra.title':'Design & audit','services.extra.text':'Feasibility, estimates, and audit of existing systems.',
-        'about.title':'About',
-        'about.text':'IT Solutions (Information Technology Service) is a team based in Almaty. We design, implement and maintain solutions in connectivity, security and automation for business and home. Our goal is reliable infrastructure, convenient control and high security.',
-        'contact.title':'Contacts','contact.reach':'Get in touch','contact.locationLabel':'Location:','contact.location':'Kazakhstan, Almaty',
-        'contact.formTitle':'Quick request',
-        'contact.form.name':'Your name','contact.form.email':'Your email','contact.form.msg':'Briefly describe your task','contact.form.send':'Send',
-        mail:{subject:'Inquiry from IT Solutions website', from:'From', req:'Request'}
-      }
+    const svc = document.getElementById('svc');
+    const groups = {
+      cctv: document.getElementById('cctvInputs'),
+      sks: document.getElementById('sksInputs'),
+      smarthome: document.getElementById('smarthomeInputs'),
+      outsourcing: document.getElementById('outsourcingInputs')
     };
+    const showGroup = key => {
+      Object.values(groups).forEach(el => el.classList.add('hidden'));
+      groups[key].classList.remove('hidden');
+    };
+    svc.addEventListener('change', e => showGroup(e.target.value));
 
-    let current = 'ru';
-    const langBtns = document.querySelectorAll('.lang button');
-    langBtns.forEach(btn=>btn.addEventListener('click', ()=>setLang(btn.dataset.lang)));
-
-    function setLang(code){
-      current = code;
-      langBtns.forEach(b=>b.classList.toggle('active', b.dataset.lang===code));
-      // Текстовые узлы
-      document.querySelectorAll('[data-i18n]').forEach(el=>{
-        const key = el.getAttribute('data-i18n');
-        if(i18n[code][key]) el.textContent = i18n[code][key];
-      });
-      // Плейсхолдеры
-      document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
-        const key = el.getAttribute('data-i18n-placeholder');
-        if(i18n[code][key]) el.setAttribute('placeholder', i18n[code][key]);
-      });
-      // Обновить mailto подписи (на лету, используется при отправке)
+    // Pricing model (ориентировочно, в тенге)
+    function format(num) {
+      return new Intl.NumberFormat('ru-RU').format(Math.round(num));
+    }
+    function calc() {
+      const type = svc.value;
+      let price = 0; let details = [];
+      if (type === 'cctv') {
+        const cams = +document.getElementById('cctvCams').value || 0;
+        const days = +document.getElementById('cctvDays').value || 0;
+        const q = document.getElementById('cctvQuality').value;
+        const camCost = q==='base'? 38000 : q==='mid'? 65000 : 120000; // за камеру
+        const nvr = Math.ceil(cams / 16) * 130000; // NVR
+        const hdd = Math.max(1, Math.ceil(cams * days / 80)) * 38000; // условная ёмкость
+        const cabling = cams * 12000; // материалы+работы
+        price = cams*camCost + nvr + hdd + cabling;
+        details.push(`Камеры ×${cams}: ~₸${format(cams*camCost)}`);
+        details.push(`NVR/PoE: ~₸${format(nvr)}`);
+        details.push(`Накопители: ~₸${format(hdd)}`);
+        details.push(`Кабель/монтаж: ~₸${format(cabling)}`);
+      }
+      if (type === 'sks') {
+        const pts = +document.getElementById('sksPoints').value || 0;
+        const len = +document.getElementById('sksLen').value || 0;
+        const mat = pts * (len * 350 + 2500); // кабель + фурнитура
+        const labor = pts * 7000; // работы
+        price = mat + labor;
+        details.push(`Материалы: ~₸${format(mat)}`);
+        details.push(`Работы: ~₸${format(labor)}`);
+      }
+      if (type === 'smarthome') {
+        const area = +document.getElementById('smhArea').value || 0;
+        const scenes = +document.getElementById('smhScenes').value || 0;
+        const hub = 180000; const sensors = scenes * 22000; const relays = Math.ceil(area/40) * 28000;
+        const labor = Math.ceil(area/20) * 9000;
+        price = hub + sensors + relays + labor;
+        details.push(`Центр/шлюзы: ~₸${format(hub)}`);
+        details.push(`Датчики/сценарии: ~₸${format(sensors)}`);
+        details.push(`Реле/модули: ~₸${format(relays)}`);
+        details.push(`Пуско‑наладка: ~₸${format(labor)}`);
+      }
+      if (type === 'outsourcing') {
+        const ppl = +document.getElementById('outPeople').value || 0;
+        const sla = document.getElementById('outSla').value;
+        const base = ppl * 3500; // за сотрудника
+        const mult = sla==='std'? 1 : sla==='plus'? 1.35 : 1.9;
+        price = Math.max(100000, base * mult);
+        details.push(`Абонентка: от ₸${format(price)} / мес`);
+        details.push(`Включено: HelpDesk, выезды, мониторинг`);
+      }
+      document.getElementById('calcPrice').textContent = `₸ ${format(price)}`;
+      document.getElementById('calcDetails').innerHTML = details.map(d=>`<div>• ${d}</div>`).join('');
+      document.getElementById('calcPayload').value = JSON.stringify({type, details, price});
+      return {price, details, type};
     }
 
-    // Инициализация языка по браузеру (ru/kk/en)
-    (function(){
-      const pref = (navigator.language||'ru').toLowerCase();
-      if(pref.startsWith('kk')) setLang('kk');
-      else if(pref.startsWith('en')) setLang('en');
-      else setLang('ru');
-    })();
-  </script>
+    document.getElementById('calcBtn').addEventListener('click', calc);
+    // init
+    showGroup('cctv');
 
-  <!--
-    ЛОГОТИП — вариант B (щит + техно-элемент)
-    Заменить SVG в <header> на этот, если нужен более «безопасный» образ.
-    <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stop-color="#37b6ff"/><stop offset="100%" stop-color="#7effa0"/>
-      </linearGradient></defs>
-      <path d="M32 6l22 8v18c0 16-22 26-22 26S10 48 10 32V14l22-8z" fill="none" stroke="url(#g2)" stroke-width="3"/>
-      <rect x="22" y="24" width="20" height="12" rx="2" fill="none" stroke="url(#g2)" stroke-width="3"/>
-      <circle cx="27" cy="30" r="1.8" fill="#37b6ff"/>
-      <circle cx="37" cy="30" r="1.8" fill="#7effa0"/>
-    </svg>
-  -->
+    // Smooth anchor focus for accessibility
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const id=a.getAttribute('href').slice(1);
+        const el=document.getElementById(id); if(!el) return;
+        setTimeout(()=>{ el.setAttribute('tabindex','-1'); el.focus({preventScroll:true}); }, 300);
+      });
+    });
+  </script>
 </body>
 </html>
