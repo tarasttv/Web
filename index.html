@@ -19,11 +19,13 @@
     "@type": "LocalBusiness",
     "name": "IT Solutions (Information Technology Service)",
     "address": {"@type": "PostalAddress", "addressLocality": "Алматы", "addressCountry": "KZ"},
-    "telephone": "+7 778 349 01 49",
+    "contactPoint": [
+      {"@type":"ContactPoint","telephone":"+7 778 349 01 49","contactType":"customer service"},
+      {"@type":"ContactPoint","telephone":"+7 707 270 08 65","contactType":"customer service"}
+    ],
     "email": "taras.ttv@gmail.com",
     "url": "https://infotechsolutions.netlify.app/",
     "areaServed": ["Алматы", "Алматинская область"],
-    "sameAs": ["https://2gis.kz/almaty"],
     "priceRange": "₸₸",
     "openingHours": "Mo-Sa 09:00-20:00"
   }
@@ -49,23 +51,30 @@
     .nav-link { opacity: .85; }
     .nav-link:hover { opacity: 1; }
     .shadow-soft { box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 1px, 1px); white-space: nowrap; border: 0; }
+    .toast { position: fixed; right: 1rem; bottom: 1rem; background: #0b1220; color: #e5e7eb; border: 1px solid rgba(255,255,255,.08); padding: .75rem 1rem; border-radius: .75rem; box-shadow: 0 10px 30px rgba(0,0,0,.3); display: none; z-index: 60; }
   </style>
 </head>
 <body class="bg-slate-900 text-slate-100">
   <!-- Header -->
   <header class="sticky top-0 z-50 glass">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-      <a href="#" class="text-xl font-extrabold tracking-tight">IT Solutions</a>
+      <a href="#" class="text-xl font-extrabold tracking-tight" id="brand">IT Solutions</a>
       <nav class="hidden md:flex items-center gap-6 text-sm">
-        <a href="#services" class="nav-link">Услуги</a>
-        <a href="#cases" class="nav-link">Кейсы</a>
-        <a href="#calculator" class="nav-link">Калькулятор</a>
-        <a href="#faq" class="nav-link">FAQ</a>
-        <a href="#contact" class="nav-link">Контакты</a>
+        <a href="#services" class="nav-link" id="nav-services">Услуги</a>
+        <a href="#cases" class="nav-link" id="nav-cases">Кейсы</a>
+        <a href="#calculator" class="nav-link" id="nav-calculator">Калькулятор</a>
+        <a href="#faq" class="nav-link" id="nav-faq">FAQ</a>
+        <a href="#contact" class="nav-link" id="nav-contacts">Контакты</a>
       </nav>
       <div class="flex items-center gap-3">
-        <button id="langBtn" class="text-xs border border-white/20 px-2 py-1 rounded-full">RU</button>
-        <a href="#lead" class="bg-brand-primary hover:opacity-90 text-slate-900 font-semibold px-4 py-2 rounded-xl">Оставить заявку</a>
+        <label for="langSelect" class="sr-only">Language</label>
+        <select id="langSelect" class="text-xs bg-slate-800 border border-white/20 px-2 py-1 rounded-full">
+          <option value="ru">RU</option>
+          <option value="kk">KZ</option>
+          <option value="en">EN</option>
+        </select>
+        <a href="#lead" class="bg-brand-primary hover:opacity-90 text-slate-900 font-semibold px-4 py-2 rounded-xl" id="btn-cta">Оставить заявку</a>
       </div>
     </div>
   </header>
@@ -75,42 +84,20 @@
     <div class="absolute -top-24 -right-24 w-[600px] h-[600px] rounded-full bg-brand-primary/10 blur-3xl"></div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 grid md:grid-cols-2 items-center gap-10">
       <div>
-        <h1 class="text-3xl md:text-5xl font-extrabold leading-tight">Комплексные IT‑решения для бизнеса и дома</h1>
-        <p class="mt-5 text-slate-300">СКС • Видеонаблюдение • Системы безопасности • Умный дом • IT‑аутсорсинг. <span class="font-semibold">Алматы и область.</span></p>
+        <h1 class="text-3xl md:text-5xl font-extrabold leading-tight" id="hero-title">Комплексные IT‑решения для бизнеса и дома</h1>
+        <p class="mt-5 text-slate-300" id="hero-sub">СКС • Видеонаблюдение • Системы безопасности • Умный дом • IT‑аутсорсинг. <span class="font-semibold">Алматы и область.</span></p>
         <div class="mt-8 flex flex-wrap gap-3">
-          <a href="#calculator" class="px-5 py-3 rounded-xl bg-white text-slate-900 font-semibold shadow-soft">Рассчитать проект</a>
-          <a href="#services" class="px-5 py-3 rounded-xl border border-white/20">Наши услуги</a>
+          <a href="#calculator" class="px-5 py-3 rounded-xl bg-white text-slate-900 font-semibold shadow-soft" id="btn-calc">Рассчитать проект</a>
+          <a href="#services" class="px-5 py-3 rounded-xl border border-white/20" id="btn-services">Наши услуги</a>
         </div>
-        <div class="mt-6 text-xs text-slate-400">Ответ в течение 15 минут в рабочее время. Бесплатный первичный аудит.</div>
+        <div class="mt-6 text-xs text-slate-400" id="hero-note">Ответ в течение 15 минут в рабочее время. Бесплатный первичный аудит.</div>
       </div>
       <div class="relative">
         <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1600&auto=format&fit=crop" alt="Server room" class="rounded-3xl shadow-soft ring-1 ring-white/10"/>
         <div class="absolute -bottom-4 -left-4 bg-slate-800/80 border border-white/10 rounded-2xl p-4 text-sm">
-          <div class="font-semibold">SLA‑поддержка 24/7</div>
-          <div class="text-slate-400">Мониторинг, удалённый доступ, выезд инженера</div>
+          <div class="font-semibold" id="hero-badge-title">SLA‑поддержка 24/7</div>
+          <div class="text-slate-400" id="hero-badge-sub">Мониторинг, удалённый доступ, выезд инженера</div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Trust badges / quick facts -->
-  <section class="border-t border-white/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-      <div>
-        <div class="text-3xl font-extrabold">10+</div>
-        <div class="text-slate-400 text-sm">лет опыта</div>
-      </div>
-      <div>
-        <div class="text-3xl font-extrabold">100+</div>
-        <div class="text-slate-400 text-sm">завершённых проектов</div>
-      </div>
-      <div>
-        <div class="text-3xl font-extrabold">24/7</div>
-        <div class="text-slate-400 text-sm">поддержка</div>
-      </div>
-      <div>
-        <div class="text-3xl font-extrabold">SLA</div>
-        <div class="text-slate-400 text-sm">с понятными KPI</div>
       </div>
     </div>
   </section>
@@ -118,52 +105,52 @@
   <!-- Services -->
   <section id="services" class="border-t border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <h2 class="text-2xl md:text-3xl font-extrabold">Наши услуги</h2>
-      <p class="mt-2 text-slate-300">Проектируем, внедряем и поддерживаем инфраструктуру под ключ.</p>
+      <h2 class="text-2xl md:text-3xl font-extrabold" id="services-title">Наши услуги</h2>
+      <p class="mt-2 text-slate-300" id="services-sub">Проектируем, внедряем и поддерживаем инфраструктуру под ключ.</p>
       <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         <!-- Card: СКС -->
         <article class="rounded-2xl border border-white/10 p-6 bg-white/5">
-          <h3 class="font-bold text-lg">Слаботочные сети (СКС)</h3>
-          <p class="text-slate-300 text-sm mt-2">Проектирование, монтаж, сертификация. Wi‑Fi, телефония, серверные.</p>
+          <h3 class="font-bold text-lg" id="svc-sks-title">Слаботочные сети (СКС)</h3>
+          <p class="text-slate-300 text-sm mt-2" id="svc-sks-desc">Проектирование, монтаж, сертификация. Wi‑Fi, телефония, серверные.</p>
           <ul class="mt-3 text-sm list-disc list-inside text-slate-300">
-            <li>Аудит и схема коммутации</li>
-            <li>Маркировка и документация</li>
-            <li>Гарантия до 5 лет</li>
+            <li id="svc-sks-li1">Аудит и схема коммутации</li>
+            <li id="svc-sks-li2">Маркировка и документация</li>
+            <li id="svc-sks-li3">Гарантия до 5 лет</li>
           </ul>
-          <a href="#lead" class="inline-block mt-4 text-brand-accent">Получить смету →</a>
+          <a href="#lead" class="inline-block mt-4 text-brand-accent" id="svc-sks-cta">Получить смету →</a>
         </article>
         <!-- Card: Видеонаблюдение -->
         <article class="rounded-2xl border border-white/10 p-6 bg-white/5">
-          <h3 class="font-bold text-lg">Видеонаблюдение и безопасность</h3>
-          <p class="text-slate-300 text-sm mt-2">IP‑камеры, NVR, аналитика. Интеграция с СКУД и пожарной.</p>
+          <h3 class="font-bold text-lg" id="svc-cctv-title">Видеонаблюдение и безопасность</h3>
+          <p class="text-slate-300 text-sm mt-2" id="svc-cctv-desc">IP‑камеры, NVR, аналитика. Интеграция с СКУД и пожарной.</p>
           <ul class="mt-3 text-sm list-disc list-inside text-slate-300">
-            <li>Удалённый доступ и запись</li>
-            <li>Хранение 7–90 дней</li>
-            <li>Голосовая и push‑сигнализация</li>
+            <li id="svc-cctv-li1">Удалённый доступ и запись</li>
+            <li id="svc-cctv-li2">Хранение 7–90 дней</li>
+            <li id="svc-cctv-li3">Голосовая и push‑сигнализация</li>
           </ul>
-          <a href="#calculator" class="inline-block mt-4 text-brand-accent">Рассчитать комплект →</a>
+          <a href="#calculator" class="inline-block mt-4 text-brand-accent" id="svc-cctv-cta">Рассчитать комплект →</a>
         </article>
         <!-- Card: Умный дом -->
         <article class="rounded-2xl border border-white/10 p-6 bg-white/5">
-          <h3 class="font-bold text-lg">Умный дом</h3>
-          <p class="text-slate-300 text-sm mt-2">Освещение, климат, безопасность. Управление со смартфона.</p>
+          <h3 class="font-bold text-lg" id="svc-smh-title">Умный дом</h3>
+          <p class="text-slate-300 text-sm mt-2" id="svc-smh-desc">Освещение, климат, безопасность. Управление со смартфона.</p>
           <ul class="mt-3 text-sm list-disc list-inside text-slate-300">
-            <li>Сценарии и датчики</li>
-            <li>Интеграция с камерой/СКУД</li>
-            <li>Смета за 24 часа</li>
+            <li id="svc-smh-li1">Сценарии и датчики</li>
+            <li id="svc-smh-li2">Интеграция с камерой/СКУД</li>
+            <li id="svc-smh-li3">Смета за 24 часа</li>
           </ul>
-          <a href="#calculator" class="inline-block mt-4 text-brand-accent">Оценить бюджет →</a>
+          <a href="#calculator" class="inline-block mt-4 text-brand-accent" id="svc-smh-cta">Оценить бюджет →</a>
         </article>
         <!-- Card: Аутсорсинг -->
         <article class="rounded-2xl border border-white/10 p-6 bg-white/5">
-          <h3 class="font-bold text-lg">IT‑аутсорсинг</h3>
-          <p class="text-slate-300 text-sm mt-2">Поддержка рабочих мест, серверов и сетей по SLA.</p>
+          <h3 class="font-bold text-lg" id="svc-outs-title">IT‑аутсорсинг</h3>
+          <p class="text-slate-300 text-sm mt-2" id="svc-outs-desc">Поддержка рабочих мест, серверов и сетей по SLA.</p>
           <ul class="mt-3 text-sm list-disc list-inside text-slate-300">
-            <li>Абонентка от 100 тыс. ₸</li>
-            <li>Мониторинг и Help Desk</li>
-            <li>Выезд инженера</li>
+            <li id="svc-outs-li1">Абонентка от 100 тыс. ₸</li>
+            <li id="svc-outs-li2">Мониторинг и Help Desk</li>
+            <li id="svc-outs-li3">Выезд инженера</li>
           </ul>
-          <a href="#lead" class="inline-block mt-4 text-brand-accent">Запросить КП →</a>
+          <a href="#lead" class="inline-block mt-4 text-brand-accent" id="svc-outs-cta">Запросить КП →</a>
         </article>
       </div>
     </div>
@@ -172,20 +159,46 @@
   <!-- Cases -->
   <section id="cases" class="border-t border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <h2 class="text-2xl md:text-3xl font-extrabold">Кейсы</h2>
-      <div class="mt-8 grid md:grid-cols-2 gap-6">
+      <h2 class="text-2xl md:text-3xl font-extrabold" id="cases-title">Кейсы</h2>
+      <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-2 gap-6">
+        <!-- Case 1 -->
         <div class="rounded-2xl overflow-hidden border border-white/10">
-          <img src="https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=1200&auto=format&fit=crop" alt="rack"/>
+          <img src="https://images.unsplash.com/photo-1583391733956-6c78247f77d3?q=80&w=1200&auto=format&fit=crop" alt="PTZ & Radio link"/>
           <div class="p-6">
-            <div class="font-semibold">Сеть и видеонаблюдение для офиса (50+ сотрудников)</div>
-            <p class="text-sm text-slate-300 mt-2">Спроектировали СКС, настроили Wi‑Fi, установили 24 IP‑камеры. Сократили простои на 60%. Поддержка по SLA.</p>
+            <div class="font-semibold" id="case1-title">Удалённое видеонаблюдение с PTZ через радиомосты</div>
+            <p class="text-sm text-slate-300 mt-2" id="case1-desc">Развернули систему наблюдения на удалённых объектах: PTZ‑камеры, радиомосты, централизованный мониторинг. Экономия на физохране ≈ ₸4 млн/год.</p>
           </div>
         </div>
+        <!-- Case 2 -->
         <div class="rounded-2xl overflow-hidden border border-white/10">
-          <img src="https://images.unsplash.com/photo-1633265486064-086b219458ec?q=80&w=1200&auto=format&fit=crop" alt="smart home"/>
+          <img src="https://images.unsplash.com/photo-1596495578065-8da24f85c3a3?q=80&w=1200&auto=format&fit=crop" alt="Office Wi‑Fi and PBX"/>
           <div class="p-6">
-            <div class="font-semibold">Умный дом в коттедже (350 м²)</div>
-            <p class="text-sm text-slate-300 mt-2">Освещение, климат, датчики безопасности, доступ через приложение. Экономия электроэнергии ~18%.</p>
+            <div class="font-semibold" id="case2-title">Повышение надёжности офисной ИТ‑инфраструктуры</div>
+            <p class="text-sm text-slate-300 mt-2" id="case2-desc">Устранили слепые зоны Wi‑Fi, настроили АТС, стандартизировали ЛВС и конфигурации. Итог — стабильная бесперебойная работа.</p>
+          </div>
+        </div>
+        <!-- Case 3 -->
+        <div class="rounded-2xl overflow-hidden border border-white/10">
+          <img src="https://images.unsplash.com/photo-1527443224154-c4b487f601f4?q=80&w=1200&auto=format&fit=crop" alt="IT outsourcing"/>
+          <div class="p-6">
+            <div class="font-semibold" id="case3-title">Круглосуточная поддержка офисов и техники</div>
+            <p class="text-sm text-slate-300 mt-2" id="case3-desc">Абонентская поддержка 24/7: заправка картриджей, удалённая помощь, установка/удаление ПО. Сотрудники работают без простоев.</p>
+          </div>
+        </div>
+        <!-- Case 4 -->
+        <div class="rounded-2xl overflow-hidden border border-white/10">
+          <img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop" alt="AI & Bots"/>
+          <div class="p-6">
+            <div class="font-semibold" id="case4-title">AI‑интеграции и чат‑боты для WhatsApp/Telegram</div>
+            <p class="text-sm text-slate-300 mt-2" id="case4-desc">Разработали вспомогательные приложения и гибких ботов. Автоматизация обработки запросов снизила нагрузку на персонал.</p>
+          </div>
+        </div>
+        <!-- Case 5 -->
+        <div class="rounded-2xl overflow-hidden border border-white/10">
+          <img src="https://images.unsplash.com/photo-1596944924616-7b38e7cfacdf?q=80&w=1200&auto=format&fit=crop" alt="Video analytics"/>
+          <div class="p-6">
+            <div class="font-semibold" id="case5-title">Интеграция видеоаналитики в процессы компаний</div>
+            <p class="text-sm text-slate-300 mt-2" id="case5-desc">Распознавание лиц, подсчёт посетителей и другие сценарии. Улучшили безопасность и получили полезную статистику в реальном времени.</p>
           </div>
         </div>
       </div>
@@ -195,36 +208,36 @@
   <!-- Calculator -->
   <section id="calculator" class="border-t border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <h2 class="text-2xl md:text-3xl font-extrabold">Калькулятор бюджета</h2>
-      <p class="mt-2 text-slate-300">Оцените ориентировочную стоимость за 1–2 минуты. Точную смету пришлём после бесплатного аудита.</p>
+      <h2 class="text-2xl md:text-3xl font-extrabold" id="calc-title">Калькулятор бюджета</h2>
+      <p class="mt-2 text-slate-300" id="calc-sub">Оцените ориентировочную стоимость за 1–2 минуты. Точную смету пришлём после бесплатного аудита.</p>
 
       <div class="mt-8 grid lg:grid-cols-2 gap-8">
         <!-- Form -->
         <div class="rounded-2xl border border-white/10 p-6 bg-white/5">
-          <label class="block text-sm text-slate-300">Направление</label>
+          <label class="block text-sm text-slate-300" id="calc-svc-lbl">Направление</label>
           <select id="svc" class="mt-1 w-full bg-slate-800 border border-white/10 rounded-xl p-3">
-            <option value="cctv">Видеонаблюдение</option>
-            <option value="sks">СКС</option>
-            <option value="smarthome">Умный дом</option>
-            <option value="outsourcing">IT‑аутсорсинг</option>
+            <option value="cctv" id="opt-cctv">Видеонаблюдение</option>
+            <option value="sks" id="opt-sks">СКС</option>
+            <option value="smarthome" id="opt-smh">Умный дом</option>
+            <option value="outsourcing" id="opt-outs">IT‑аутсорсинг</option>
           </select>
 
           <!-- CCTV inputs -->
           <div id="cctvInputs" class="mt-4 space-y-4">
             <div>
-              <label class="block text-sm">Количество камер</label>
+              <label class="block text-sm" id="lbl-cctv-cams">Количество камер</label>
               <input type="number" id="cctvCams" min="1" value="8" class="mt-1 w-full bg-slate-800 border border-white/10 rounded-xl p-3"/>
             </div>
             <div>
-              <label class="block text-sm">Срок хранения (дней)</label>
+              <label class="block text-sm" id="lbl-cctv-days">Срок хранения (дней)</label>
               <input type="number" id="cctvDays" min="7" value="30" class="mt-1 w-full bg-slate-800 border border-white/10 rounded-xl p-3"/>
             </div>
             <div>
-              <label class="block text-sm">Качество</label>
+              <label class="block text-sm" id="lbl-cctv-quality">Качество</label>
               <select id="cctvQuality" class="mt-1 w-full bg-slate-800 border border-white/10 rounded-xl p-3">
-                <option value="base">Базовое (2MP)</option>
-                <option value="mid">Оптимум (4MP)</option>
-                <option value="pro">Премиум (8MP)</option>
+                <option value="base" id="opt-q-base">Базовое (2MP)</option>
+                <option value="mid" id="opt-q-mid">Оптимум (4MP)</option>
+                <option value="pro" id="opt-q-pro">Премиум (8MP)</option>
               </select>
             </div>
           </div>
@@ -232,11 +245,11 @@
           <!-- SKS inputs -->
           <div id="sksInputs" class="mt-4 space-y-4 hidden">
             <div>
-              <label class="block text-sm">Количество точек (розеток)</label>
+              <label class="block text-sm" id="lbl-sks-points">Количество точек (розеток)</label>
               <input type="number" id="sksPoints" min="4" value="20" class="mt-1 w-full bg-slate-800 border border-white/10 rounded-xl p-3"/>
             </div>
             <div>
-              <label class="block text-sm">Длина трасс, м (среднее)</label>
+              <label class="block text-sm" id="lbl-sks-len">Длина трасс, м (среднее)</label>
               <input type="number" id="sksLen" min="5" value="25" class="mt-1 w-full bg-slate-800 border border-white/10 rounded-xl p-3"/>
             </div>
           </div>
@@ -244,11 +257,11 @@
           <!-- SmartHome inputs -->
           <div id="smarthomeInputs" class="mt-4 space-y-4 hidden">
             <div>
-              <label class="block text-sm">Площадь объекта, м²</label>
+              <label class="block text-sm" id="lbl-smh-area">Площадь объекта, м²</label>
               <input type="number" id="smhArea" min="30" value="120" class="mt-1 w-full bg-slate-800 border border-white/10 rounded-xl p-3"/>
             </div>
             <div>
-              <label class="block text-sm">Количество сценариев</label>
+              <label class="block text-sm" id="lbl-smh-scenes">Количество сценариев</label>
               <input type="number" id="smhScenes" min="3" value="10" class="mt-1 w-full bg-slate-800 border border-white/10 rounded-xl p-3"/>
             </div>
           </div>
@@ -256,15 +269,15 @@
           <!-- Outsourcing inputs -->
           <div id="outsourcingInputs" class="mt-4 space-y-4 hidden">
             <div>
-              <label class="block text-sm">Кол-во сотрудников</label>
+              <label class="block text-sm" id="lbl-outs-people">Кол-во сотрудников</label>
               <input type="number" id="outPeople" min="5" value="25" class="mt-1 w-full bg-slate-800 border border-white/10 rounded-xl p-3"/>
             </div>
             <div>
-              <label class="block text-sm">Критичность</label>
+              <label class="block text-sm" id="lbl-outs-sla">Критичность</label>
               <select id="outSla" class="mt-1 w-full bg-slate-800 border border-white/10 rounded-xl p-3">
-                <option value="std">Стандарт (9×5)</option>
-                <option value="plus">Plus (12×6)</option>
-                <option value="pro">PRO (24×7)</option>
+                <option value="std" id="opt-sla-std">Стандарт (9×5)</option>
+                <option value="plus" id="opt-sla-plus">Plus (12×6)</option>
+                <option value="pro" id="opt-sla-pro">PRO (24×7)</option>
               </select>
             </div>
           </div>
@@ -274,23 +287,21 @@
 
         <!-- Output -->
         <div class="rounded-2xl border border-white/10 p-6 bg-white/5">
-          <div class="text-sm text-slate-300">Ориентировочная стоимость</div>
+          <div class="text-sm text-slate-300" id="calc-out-title">Ориентировочная стоимость</div>
           <div id="calcPrice" class="mt-2 text-4xl font-extrabold">—</div>
           <div id="calcDetails" class="mt-4 text-sm text-slate-300 space-y-2"></div>
-          <div class="mt-6 p-4 rounded-xl bg-slate-800/70 border border-white/10 text-sm">
+          <div class="mt-6 p-4 rounded-xl bg-slate-800/70 border border-white/10 text-sm" id="calc-disclaimer">
             Итог не является офертой. После бесплатного выезда инженера пришлём точную смету в течение 24 часов.
           </div>
 
-          <!-- Netlify lead form -->
-          <form name="calc-lead" method="POST" data-netlify="true" class="mt-6 grid gap-3" netlify-honeypot="bot-field">
-            <input type="hidden" name="form-name" value="calc-lead" />
-            <p class="hidden"><label>Don’t fill this out: <input name="bot-field" /></label></p>
-            <input required class="bg-slate-800 border border-white/10 rounded-xl p-3" name="name" placeholder="Ваше имя" />
-            <input required class="bg-slate-800 border border-white/10 rounded-xl p-3" name="phone" placeholder="Телефон" />
-            <input class="bg-slate-800 border border-white/10 rounded-xl p-3" name="email" placeholder="E‑mail (необязательно)" />
-            <textarea class="bg-slate-800 border border-white/10 rounded-xl p-3" name="comment" placeholder="Комментарий"></textarea>
-            <input type="hidden" id="calcPayload" name="calc_payload" />
-            <button class="bg-brand-accent text-slate-900 font-semibold py-3 rounded-xl">Отправить расчёт</button>
+          <!-- Email lead (mailto) -->
+          <form id="calcLeadForm" class="mt-6 grid gap-3">
+            <input required class="bg-slate-800 border border-white/10 rounded-xl p-3" name="name" id="calcName" placeholder="Ваше имя" />
+            <input required class="bg-slate-800 border border-white/10 rounded-xl p-3" name="phone" id="calcPhone" placeholder="Телефон" />
+            <input class="bg-slate-800 border border-white/10 rounded-xl p-3" name="email" id="calcEmail" placeholder="E‑mail (необязательно)" />
+            <textarea class="bg-slate-800 border border-white/10 rounded-xl p-3" name="comment" id="calcComment" placeholder="Комментарий"></textarea>
+            <button class="bg-brand-accent text-slate-900 font-semibold py-3 rounded-xl" id="btn-send-calc">Отправить расчёт</button>
+            <div class="text-xs text-slate-400" id="mailto-note">Письмо откроется в вашем почтовом клиенте для отправки на taras.ttv@gmail.com</div>
           </form>
         </div>
       </div>
@@ -302,28 +313,26 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <div class="grid lg:grid-cols-2 gap-8 items-center">
         <div>
-          <h2 class="text-2xl md:text-3xl font-extrabold">Бесплатный аудит инфраструктуры</h2>
-          <p class="mt-2 text-slate-300">Проверим сеть, камеры, серверную и подготовим рекомендации с бюджетом.
-          </p>
+          <h2 class="text-2xl md:text-3xl font-extrabold" id="lead-title">Бесплатный аудит инфраструктуры</h2>
+          <p class="mt-2 text-slate-300" id="lead-sub">Проверим сеть, камеры, серверную и подготовим рекомендации с бюджетом.</p>
           <ul class="mt-4 text-slate-300 list-disc list-inside text-sm space-y-1">
-            <li>Выезд инженера в день обращения</li>
-            <li>Письменный отчёт и КП в течение 24 часов</li>
-            <li>Гарантия и SLA‑поддержка</li>
+            <li id="lead-li1">Выезд инженера в день обращения</li>
+            <li id="lead-li2">Письменный отчёт и КП в течение 24 часов</li>
+            <li id="lead-li3">Гарантия и SLA‑поддержка</li>
           </ul>
         </div>
-        <form name="quick-lead" method="POST" data-netlify="true" class="rounded-2xl border border-white/10 p-6 bg-white/5 grid gap-3" netlify-honeypot="bot-field">
-          <input type="hidden" name="form-name" value="quick-lead" />
-          <p class="hidden"><label>Don’t fill this out: <input name="bot-field" /></label></p>
-          <input required class="bg-slate-800 border border-white/10 rounded-xl p-3" name="name" placeholder="Ваше имя" />
-          <input required class="bg-slate-800 border border-white/10 rounded-xl p-3" name="phone" placeholder="Телефон" />
-          <select name="service" class="bg-slate-800 border border-white/10 rounded-xl p-3">
+        <form id="quickLeadForm" class="rounded-2xl border border-white/10 p-6 bg-white/5 grid gap-3">
+          <input required class="bg-slate-800 border border-white/10 rounded-xl p-3" name="name" id="qName" placeholder="Ваше имя" />
+          <input required class="bg-slate-800 border border-white/10 rounded-xl p-3" name="phone" id="qPhone" placeholder="Телефон" />
+          <select name="service" id="qService" class="bg-slate-800 border border-white/10 rounded-xl p-3">
             <option>Видеонаблюдение</option>
             <option>СКС</option>
             <option>Умный дом</option>
             <option>IT‑аутсорсинг</option>
           </select>
-          <textarea class="bg-slate-800 border border-white/10 rounded-xl p-3" name="message" placeholder="Кратко опишите задачу"></textarea>
-          <button class="bg-brand-primary text-slate-900 font-semibold py-3 rounded-xl">Отправить заявку</button>
+          <textarea class="bg-slate-800 border border-white/10 rounded-xl p-3" name="message" id="qMsg" placeholder="Кратко опишите задачу"></textarea>
+          <button class="bg-brand-primary text-slate-900 font-semibold py-3 rounded-xl" id="btn-send-lead">Отправить заявку</button>
+          <div class="text-xs text-slate-400" id="mailto-note2">Письмо откроется в вашем почтовом клиенте для отправки на taras.ttv@gmail.com</div>
         </form>
       </div>
     </div>
@@ -332,19 +341,48 @@
   <!-- FAQ -->
   <section id="faq" class="border-t border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <h2 class="text-2xl md:text-3xl font-extrabold">Частые вопросы</h2>
-      <div class="mt-6 divide-y divide-white/10">
+      <h2 class="text-2xl md:text-3xl font-extrabold" id="faq-title">Частые вопросы</h2>
+      <div class="mt-6 divide-y divide-white/10" id="faq-list">
+        <!-- 10 Q&A items -->
         <details class="py-4">
-          <summary class="cursor-pointer font-semibold">Сколько хранится видеоархив?</summary>
-          <p class="mt-2 text-slate-300">Стандартно 7–30 дней. Подберём диски под ваш регламент (до 180 дней).</p>
+          <summary class="cursor-pointer font-semibold" id="q1">Что входит в IT‑аутсорсинг?</summary>
+          <p class="mt-2 text-slate-300" id="a1">Поддержка рабочих мест и серверов, обслуживание сетей и ПО, резервное копирование, мониторинг и реагирование по SLA.</p>
         </details>
         <details class="py-4">
-          <summary class="cursor-pointer font-semibold">Можно ли интегрировать доступ по картам/Face ID?</summary>
-          <p class="mt-2 text-slate-300">Да, интегрируем СКУД с видеонаблюдением и журналами событий.</p>
+          <summary class="cursor-pointer font-semibold" id="q2">Почему аутсорсинг выгоднее штатного ИТ?</summary>
+          <p class="mt-2 text-slate-300" id="a2">Экономия на зарплатах и обучении, доступ к команде экспертов, покрытие 24/7 и предсказуемая стоимость.</p>
         </details>
         <details class="py-4">
-          <summary class="cursor-pointer font-semibold">Как быстро выезжает инженер?</summary>
-          <p class="mt-2 text-slate-300">По Алматы — в день обращения, по области — на следующий день.</p>
+          <summary class="cursor-pointer font-semibold" id="q3">Как быстро вы реагируете на инциденты?</summary>
+          <p class="mt-2 text-slate-300" id="a3">Первичный отклик — до 15 минут в рабочее время. Срочные выезды по Алматы — день в день.</p>
+        </details>
+        <details class="py-4">
+          <summary class="cursor-pointer font-semibold" id="q4">Какие решения по видеонаблюдению вы ставите?</summary>
+          <p class="mt-2 text-slate-300" id="a4">IP‑системы с PTZ‑камерами, подключение удалённых объектов через радиомосты, интеграция с СКУД и пожарной сигнализацией.</p>
+        </details>
+        <details class="py-4">
+          <summary class="cursor-pointer font-semibold" id="q5">Что такое видеоаналитика и зачем она нужна?</summary>
+          <p class="mt-2 text-slate-300" id="a5">Алгоритмы распознают лица, считают посетителей, детектируют события. Это повышает безопасность и даёт бизнес‑метрики.</p>
+        </details>
+        <details class="py-4">
+          <summary class="cursor-pointer font-semibold" id="q6">Как вы проектируете и монтируете СКС?</summary>
+          <p class="mt-2 text-slate-300" id="a6">Делаем аудит и схему, сертифицируем линии, маркируем, сдаём документацию. Система масштабируема и стандартизирована.</p>
+        </details>
+        <details class="py-4">
+          <summary class="cursor-pointer font-semibold" id="q7">Можно ли собрать умный дом под наши сценарии?</summary>
+          <p class="mt-2 text-slate-300" id="a7">Да. Настраиваем освещение, климат, безопасность и автоматические сценарии. Управление через приложение.</p>
+        </details>
+        <details class="py-4">
+          <summary class="cursor-pointer font-semibold" id="q8">Работаете ли вы по разовым задачам?</summary>
+          <p class="mt-2 text-slate-300" id="a8">Да. Разовые проекты (монтаж, настройка, миграции) и долгосрочная поддержка по абонентке.</p>
+        </details>
+        <details class="py-4">
+          <summary class="cursor-pointer font-semibold" id="q9">Как формируется стоимость проекта?</summary>
+          <p class="mt-2 text-slate-300" id="a9">Зависит от объёма и сложности. Калькулятор даст ориентир, точную смету вышлем после бесплатного аудита.</p>
+        </details>
+        <details class="py-4">
+          <summary class="cursor-pointer font-semibold" id="q10">Как оставить заявку?</summary>
+          <p class="mt-2 text-slate-300" id="a10">Через формы на сайте — мы откроем письмо в вашем почтовом клиенте на адрес taras.ttv@gmail.com — либо позвоните нам.</p>
         </details>
       </div>
     </div>
@@ -353,120 +391,70 @@
   <!-- Contacts -->
   <section id="contact" class="border-t border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <h2 class="text-2xl md:text-3xl font-extrabold">Контакты</h2>
+      <h2 class="text-2xl md:text-3xl font-extrabold" id="contacts-title">Контакты</h2>
       <div class="mt-4 grid md:grid-cols-3 gap-6 text-sm">
         <div class="rounded-2xl border border-white/10 p-6 bg-white/5">
-          <div class="text-slate-300">Телефон</div>
-          <div class="font-semibold mt-1"><a href="tel:+77783490149">+7 778 349 01 49</a></div>
+          <div class="text-slate-300" id="lbl-phone">Телефон</div>
+          <div class="font-semibold mt-1">
+            <a href="tel:+77783490149" id="phone1">+7 778 349 01 49</a><br/>
+            <a href="tel:+77072700865" id="phone2">+7 707 270 08 65</a>
+          </div>
         </div>
         <div class="rounded-2xl border border-white/10 p-6 bg-white/5">
-          <div class="text-slate-300">Email</div>
-          <div class="font-semibold mt-1"><a href="mailto:taras.ttv@gmail.com">taras.ttv@gmail.com</a></div>
+          <div class="text-slate-300" id="lbl-email">Email</div>
+          <div class="font-semibold mt-1"><a href="mailto:taras.ttv@gmail.com" id="emailLink">taras.ttv@gmail.com</a></div>
         </div>
         <div class="rounded-2xl border border-white/10 p-6 bg-white/5">
-          <div class="text-slate-300">Локация</div>
-          <div class="font-semibold mt-1">Алматы, Казахстан</div>
+          <div class="text-slate-300" id="lbl-location">Локация</div>
+          <div class="font-semibold mt-1" id="location">Алматы, Казахстан</div>
         </div>
       </div>
-      <div class="mt-8 text-xs text-slate-400">© IT Solutions — Information Technology Service</div>
+      <div class="mt-8 text-xs text-slate-400" id="copyright">© IT Solutions — Information Technology Service</div>
     </div>
   </section>
 
   <!-- Footer -->
   <footer class="border-t border-white/10 py-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between text-xs text-slate-400">
-      <div>RU | KZ | EN (в разработке)</div>
-      <a href="#" class="hover:text-white">Политика конфиденциальности</a>
+      <div id="lang-note">RU | KZ | EN</div>
+      <a href="#" class="hover:text-white" id="privacy">Политика конфиденциальности</a>
     </div>
   </footer>
 
+  <div class="toast" id="toast">Мы открыли письмо в вашем почтовом клиенте. Если письмо не открылось — проверьте настройки почты.</div>
+
   <script>
-    // Simple i18n placeholder (extensible later)
-    document.getElementById('langBtn').addEventListener('click', () => {
-      alert('KZ/EN версии будут подключены по запросу — структура уже готова.');
-    });
-
-    const svc = document.getElementById('svc');
-    const groups = {
-      cctv: document.getElementById('cctvInputs'),
-      sks: document.getElementById('sksInputs'),
-      smarthome: document.getElementById('smarthomeInputs'),
-      outsourcing: document.getElementById('outsourcingInputs')
-    };
-    const showGroup = key => {
-      Object.values(groups).forEach(el => el.classList.add('hidden'));
-      groups[key].classList.remove('hidden');
-    };
-    svc.addEventListener('change', e => showGroup(e.target.value));
-
-    // Pricing model (ориентировочно, в тенге)
-    function format(num) {
-      return new Intl.NumberFormat('ru-RU').format(Math.round(num));
-    }
-    function calc() {
-      const type = svc.value;
-      let price = 0; let details = [];
-      if (type === 'cctv') {
-        const cams = +document.getElementById('cctvCams').value || 0;
-        const days = +document.getElementById('cctvDays').value || 0;
-        const q = document.getElementById('cctvQuality').value;
-        const camCost = q==='base'? 38000 : q==='mid'? 65000 : 120000; // за камеру
-        const nvr = Math.ceil(cams / 16) * 130000; // NVR
-        const hdd = Math.max(1, Math.ceil(cams * days / 80)) * 38000; // условная ёмкость
-        const cabling = cams * 12000; // материалы+работы
-        price = cams*camCost + nvr + hdd + cabling;
-        details.push(`Камеры ×${cams}: ~₸${format(cams*camCost)}`);
-        details.push(`NVR/PoE: ~₸${format(nvr)}`);
-        details.push(`Накопители: ~₸${format(hdd)}`);
-        details.push(`Кабель/монтаж: ~₸${format(cabling)}`);
-      }
-      if (type === 'sks') {
-        const pts = +document.getElementById('sksPoints').value || 0;
-        const len = +document.getElementById('sksLen').value || 0;
-        const mat = pts * (len * 350 + 2500); // кабель + фурнитура
-        const labor = pts * 7000; // работы
-        price = mat + labor;
-        details.push(`Материалы: ~₸${format(mat)}`);
-        details.push(`Работы: ~₸${format(labor)}`);
-      }
-      if (type === 'smarthome') {
-        const area = +document.getElementById('smhArea').value || 0;
-        const scenes = +document.getElementById('smhScenes').value || 0;
-        const hub = 180000; const sensors = scenes * 22000; const relays = Math.ceil(area/40) * 28000;
-        const labor = Math.ceil(area/20) * 9000;
-        price = hub + sensors + relays + labor;
-        details.push(`Центр/шлюзы: ~₸${format(hub)}`);
-        details.push(`Датчики/сценарии: ~₸${format(sensors)}`);
-        details.push(`Реле/модули: ~₸${format(relays)}`);
-        details.push(`Пуско‑наладка: ~₸${format(labor)}`);
-      }
-      if (type === 'outsourcing') {
-        const ppl = +document.getElementById('outPeople').value || 0;
-        const sla = document.getElementById('outSla').value;
-        const base = ppl * 3500; // за сотрудника
-        const mult = sla==='std'? 1 : sla==='plus'? 1.35 : 1.9;
-        price = Math.max(100000, base * mult);
-        details.push(`Абонентка: от ₸${format(price)} / мес`);
-        details.push(`Включено: HelpDesk, выезды, мониторинг`);
-      }
-      document.getElementById('calcPrice').textContent = `₸ ${format(price)}`;
-      document.getElementById('calcDetails').innerHTML = details.map(d=>`<div>• ${d}</div>`).join('');
-      document.getElementById('calcPayload').value = JSON.stringify({type, details, price});
-      return {price, details, type};
-    }
-
-    document.getElementById('calcBtn').addEventListener('click', calc);
-    // init
-    showGroup('cctv');
-
-    // Smooth anchor focus for accessibility
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click', e=>{
-        const id=a.getAttribute('href').slice(1);
-        const el=document.getElementById(id); if(!el) return;
-        setTimeout(()=>{ el.setAttribute('tabindex','-1'); el.focus({preventScroll:true}); }, 300);
-      });
-    });
-  </script>
-</body>
-</html>
+    // ===== i18n (RU / KZ / EN) =====
+    const I18N = {
+      ru: {
+        nav: {services: 'Услуги', cases: 'Кейсы', calculator: 'Калькулятор', faq: 'FAQ', contacts: 'Контакты'},
+        cta: {lead: 'Оставить заявку', calc: 'Рассчитать проект', services: 'Наши услуги'},
+        hero: {title: 'Комплексные IT‑решения для бизнеса и дома', sub: 'СКС • Видеонаблюдение • Системы безопасности • Умный дом • IT‑аутсорсинг. <span class="font-semibold">Алматы и область.</span>', note:'Ответ в течение 15 минут в рабочее время. Бесплатный первичный аудит.', badge1:'SLA‑поддержка 24/7', badge2:'Мониторинг, удалённый доступ, выезд инженера'},
+        services: {title:'Наши услуги', sub:'Проектируем, внедряем и поддерживаем инфраструктуру под ключ.', sks:{title:'Слаботочные сети (СКС)', desc:'Проектирование, монтаж, сертификация. Wi‑Fi, телефония, серверные.', li1:'Аудит и схема коммутации', li2:'Маркировка и документация', li3:'Гарантия до 5 лет', cta:'Получить смету →'}, cctv:{title:'Видеонаблюдение и безопасность', desc:'IP‑камеры, NVR, аналитика. Интеграция с СКУД и пожарной.', li1:'Удалённый доступ и запись', li2:'Хранение 7–90 дней', li3:'Голосовая и push‑сигнализация', cta:'Рассчитать комплект →'}, smh:{title:'Умный дом', desc:'Освещение, климат, безопасность. Управление со смартфона.', li1:'Сценарии и датчики', li2:'Интеграция с камерой/СКУД', li3:'Смета за 24 часа', cta:'Оценить бюджет →'}, outs:{title:'IT‑аутсорсинг', desc:'Поддержка рабочих мест, серверов и сетей по SLA.', li1:'Абонентка от 100 тыс. ₸', li2:'Мониторинг и Help Desk', li3:'Выезд инженера', cta:'Запросить КП →'}},
+        cases: {title:'Кейсы', c1t:'Удалённое видеонаблюдение с PTZ через радиомосты', c1d:'Развернули систему наблюдения на удалённых объектах: PTZ‑камеры, радиомосты, централизованный мониторинг. Экономия на физохране ≈ ₸4 млн/год.', c2t:'Повышение надёжности офисной ИТ‑инфраструктуры', c2d:'Устранили слепые зоны Wi‑Fi, настроили АТС, стандартизировали ЛВС и конфигурации. Итог — стабильная бесперебойная работа.', c3t:'Круглосуточная поддержка офисов и техники', c3d:'Абонентская поддержка 24/7: заправка картриджей, удалённая помощь, установка/удаление ПО. Сотрудники работают без простоев.', c4t:'AI‑интеграции и чат‑боты для WhatsApp/Telegram', c4d:'Разработали вспомогательные приложения и гибких ботов. Автоматизация обработки запросов снизила нагрузку на персонал.', c5t:'Интеграция видеоаналитики в процессы компаний', c5d:'Распознавание лиц, подсчёт посетителей и другие сценарии. Улучшили безопасность и получили полезную статистику в реальном времени.'},
+        calc: {title:'Калькулятор бюджета', sub:'Оцените ориентировочную стоимость за 1–2 минуты. Точную смету пришлём после бесплатного аудита.', svc:'Направление', outTitle:'Ориентировочная стоимость', disclaimer:'Итог не является офертой. После бесплатного выезда инженера пришлём точную смету в течение 24 часов.', mailNote:'Письмо откроется в вашем почтовом клиенте для отправки на taras.ttv@gmail.com'},
+        labels: {cams:'Количество камер', days:'Срок хранения (дней)', quality:'Качество', sksPoints:'Количество точек (розеток)', sksLen:'Длина трасс, м (среднее)', area:'Площадь объекта, м²', scenes:'Количество сценариев', ppl:'Кол-во сотрудников', sla:'Критичность', qleadTitle:'Бесплатный аудит инфраструктуры', qleadSub:'Проверим сеть, камеры, серверную и подготовим рекомендации с бюджетом.', qlead1:'Выезд инженера в день обращения', qlead2:'Письменный отчёт и КП в течение 24 часов', qlead3:'Гарантия и SLA‑поддержка', name:'Ваше имя', phone:'Телефон', email:'E‑mail (необязательно)', comment:'Комментарий', msg:'Кратко опишите задачу', sendCalc:'Отправить расчёт', sendLead:'Отправить заявку'},
+        faq: {title:'Частые вопросы',
+          q1:'Что входит в IT‑аутсорсинг?', a1:'Поддержка рабочих мест и серверов, обслуживание сетей и ПО, резервное копирование, мониторинг и реагирование по SLA.',
+          q2:'Почему аутсорсинг выгоднее штатного ИТ?', a2:'Экономия на зарплатах и обучении, доступ к команде экспертов, покрытие 24/7 и предсказуемая стоимость.',
+          q3:'Как быстро вы реагируете на инциденты?', a3:'Первичный отклик — до 15 минут в рабочее время. Срочные выезды по Алматы — день в день.',
+          q4:'Какие решения по видеонаблюдению вы ставите?', a4:'IP‑системы с PTZ‑камерами, подключение удалённых объектов через радиомосты, интеграция с СКУД и пожарной сигнализацией.',
+          q5:'Что такое видеоаналитика и зачем она нужна?', a5:'Алгоритмы распознают лица, считают посетителей, детектируют события. Это повышает безопасность и даёт бизнес‑метрики.',
+          q6:'Как вы проектируете и монтируете СКС?', a6:'Делаем аудит и схему, сертифицируем линии, маркируем, сдаём документацию. Система масштабируема и стандартизирована.',
+          q7:'Можно ли собрать умный дом под наши сценарии?', a7:'Да. Настраиваем освещение, климат, безопасность и автоматические сценарии. Управление через приложение.',
+          q8:'Работаете ли вы по разовым задачам?', a8:'Да. Разовые проекты (монтаж, настройка, миграции) и долгосрочная поддержка по абонентке.',
+          q9:'Как формируется стоимость проекта?', a9:'Зависит от объёма и сложности. Калькулятор даст ориентир, точную смету вышлем после бесплатного аудита.',
+          q10:'Как оставить заявку?', a10:'Через формы на сайте — мы откроем письмо в вашем почтовом клиенте на адрес taras.ttv@gmail.com — либо позвоните нам.'
+        },
+        contacts: {title:'Контакты', phone:'Телефон', email:'Email', location:'Локация', city:'Алматы, Казахстан'},
+        footer: {langs:'RU | KZ | EN', privacy:'Политика конфиденциальности'},
+        toast: 'Мы открыли письмо в вашем почтовом клиенте. Если письмо не открылось — проверьте настройки почты.'
+      },
+      kk: {
+        nav: {services: 'Қызметтер', cases: 'Кейстер', calculator: 'Калькулятор', faq: 'Жиі сұрақтар', contacts: 'Байланыс'},
+        cta: {lead: 'Өтініш қалдыру', calc: 'Жобаны есептеу', services: 'Қызметтеріміз'},
+        hero: {title: 'Бизнес пен үйге арналған кешенді IT-шешімдер', sub: 'СКС • Бейнебақылау • Қауіпсіздік жүйелері • Ақылды үй • IT-аутсорсинг. <span class="font-semibold">Алматы және облыс.</span>', note:'Жұмыс уақытында 15 минут ішінде жауап. Тегін бастапқы аудит.', badge1:'SLA-қолдау 24/7', badge2:'Мониторинг, қашықтан қолжетімділік, инженердің шығуы'},
+        services: {title:'Қызметтеріміз', sub:'Инфрақұрылымды жобалаймыз, енгіземіз және сүйемелдейміз.', sks:{title:'Слаботок желілері (СКС)', desc:'Жобалау, монтаж, сертификаттау. Wi‑Fi, телефония, серверлік.', li1:'Аудит және коммутация схемасы', li2:'Маркировка және құжаттама', li3:'Кепілдік 5 жылға дейін', cta:'Смете алу →'}, cctv:{title:'Бейнебақылау және қауіпсіздік', desc:'IP-камералар, NVR, аналитика. СКУД және өрт дабылымен интеграция.', li1:'Қашықтан қолжетімділік және жазба', li2:'7–90 күн сақтау', li3:'Дыбыстық және push-хабарлама', cta:'Жинақты есептеу →'}, smh:{title:'Ақылды үй', desc:'Жарық, климат, қауіпсіздік. Смартфон арқылы басқару.', li1:'Сценарийлер мен датчиктер', li2:'Камера/СКУД интеграциясы', li3:'Смете 24 сағат ішінде', cta:'Бюджетті бағалау →'}, outs:{title:'IT-аутсорсинг', desc:'Жұмыс орындары, серверлер және желілерді SLA бойынша қолдау.', li1:'Абоненттік төлем 100 мың ₸-ден', li2:'Мониторинг және Help Desk', li3:'Инженердің шығуы', cta:'КП сұрау →'}},
+        cases: {title:'Кейстер', c1t:'Радиомостар арқылы PTZ-қашықтан бейнебақылау', c1d:'Қашықтағы нысандарда бақылау жүйесін орнаттық: PTZ-камералар, радиомостар, орталық мониторинг. Қорғау шығындары ≈ ₸4 млн/жыл үнем.', c2t:'Кеңсе IT-инфрақұрылымының сенімділігін арттыру', c2d:'Wi‑Fi «соқыр» аймақтарын жойдық, АТС баптадық, ЛВС мен конфигурацияларды стандарттадық. Нәтиже — тұрақты жұмыс.', c3t:'Кеңселер мен техниканы тәулік бойы қолдау', c3d:'24/7 абоненттік қолдау: картридж толтыру, қашықтан көмек, БҚ орнату/өшіру. Қызметкерлер тоқтаусыз жұмыс істейді.', c4t:'AI-интеграциялар және WhatsApp/Telegram боттары', c4d:'Көмекші қолданбалар мен икемді боттар әзірледік. Сұраныстарды автоматтандыру қызметкерлер жүктемесін азайтты.', c5t:'Компания процестеріне видеоаналитиканы енгізу', c5d:'Беттерді тану, келушілерді санау және т.б. сценарийлер. Қауіпсіздік жақсарды, пайдалы статистика алынды.'},
+        calc: {title:'Бюджет калькуляторы', sub:'2 минутта шамамен құнын бағалаңыз. Дәл сметені тегін аудиттен кейін жібереміз.', svc:'Бағыт', outTitle:'Шамамен құны', disclaimer:'Қорытынды оферта емес. Инженердің тегін шығуынан кейін 24 сағат ішінде нақты сметені жібереміз.', mailNote:'Хат пошта клиентіңізде ашылады: taras.ttv@gmail.com'},
+        labels: {cams:'Камера саны', days:'Сақтау мерзімі (күн)', quality:'Сапа', sksPoints:'Нүктелер саны (розетка)', sksLen:'Трасса ұзынд
