@@ -1,0 +1,9 @@
+[functions]
+  directory = "netlify/functions"
+
+[build]
+  publish = "."         # у тебя статический сайт из корня
+  command = ""          # сборка не нужна
+
+[build.environment]
+  NODE_VERSION = "18"   # чтобы функции работали на Node 18+
