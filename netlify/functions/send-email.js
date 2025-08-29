@@ -1,20 +1,27 @@
 // netlify/functions/send-email.js
 const { Resend } = require('resend');
 
+function stripHtml(s='') {
+  return String(s).replace(/<[^>]+>/g, '').replace(/\s+\n/g, '\n').trim();
+}
+function escapeHtml(s='') {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
 exports.handler = async (event) => {
-  // Только POST
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
 
+  const hasKey = !!process.env.RESEND_API_KEY;
+  const TO = process.env.TO_EMAIL || 'taras.ttv@gmail.com';
+  const FROM = process.env.FROM_EMAIL || 'IT Solutions <onboarding@resend.dev>';
+
+  let attempted = false;
+  let dataId = null;
+
   try {
     const data = JSON.parse(event.body || '{}');
-    const resend = new Resend(process.env.RESEND_API_KEY);
-
-    const TO = process.env.TO_EMAIL || 'taras.ttv@gmail.com';
-    // Для быстрого старта используем технический адрес Resend
-    const FROM = process.env.FROM_EMAIL || 'IT Solutions <onboarding@resend.dev>';
-
     const {
       source = 'lead',
       name = '-',
@@ -35,7 +42,7 @@ exports.handler = async (event) => {
 
     const html = `
       <div style="font-family:Inter,Arial,sans-serif;font-size:14px;line-height:1.6">
-        <h2>${subject}</h2>
+        <h2>${escapeHtml(subject)}</h2>
         <p><b>Имя:</b> ${escapeHtml(name)}</p>
         <p><b>Телефон:</b> ${escapeHtml(phone)}</p>
         ${email && email !== '-' ? `<p><b>E-mail:</b> ${escapeHtml(email)}</p>` : ''}
@@ -52,24 +59,72 @@ exports.handler = async (event) => {
       </div>
     `;
 
-    await resend.emails.send({
+    if (!hasKey) {
+      // Ключа нет — возвращаем диагностику 500, чтобы это было видно сразу
+      return {
+        statusCode: 500,
+        body: JSON.stringify({
+          ok: false,
+          error: 'Missing RESEND_API_KEY',
+          hasKey,
+          to: TO,
+          from: FROM,
+          attempted
+        })
+      };
+    }
+
+    const resend = new Resend(process.env.RESEND_API_KEY);
+    attempted = true;
+
+    const { data: sendData, error } = await resend.emails.send({
       from: FROM,
-      to: TO,
+      to: [TO],
       subject,
-      html
+      html,
+      text: stripHtml(html),
+      reply_to: (email && email !== '-') ? [email] : undefined
     });
 
-    return { statusCode: 200, body: JSON.stringify({ ok: true }) };
+    if (error) {
+      return {
+        statusCode: 500,
+        body: JSON.stringify({
+          ok: false,
+          error: error.message || String(error),
+          hasKey,
+          to: TO,
+          from: FROM,
+          attempted
+        })
+      };
+    }
+
+    dataId = sendData?.id || null;
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        ok: true,
+        id: dataId,
+        hasKey,
+        to: TO,
+        from: FROM,
+        attempted
+      })
+    };
   } catch (err) {
-    console.error(err);
-    return { statusCode: 500, body: JSON.stringify({ ok: false, error: err.message }) };
+    return {
+      statusCode: 500,
+      body: JSON.stringify({
+        ok: false,
+        error: err.message || String(err),
+        hasKey,
+        to: TO,
+        from: FROM,
+        attempted,
+        id: dataId
+      })
+    };
   }
 };
-
-// простая экранизация, чтобы не сломать HTML письма
-function escapeHtml(s='') {
-  return String(s)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;');
-}
