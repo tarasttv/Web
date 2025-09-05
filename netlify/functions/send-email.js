@@ -5,14 +5,14 @@ export const handler = async (event) => {
   }
 
   const key = process.env.RESEND_API_KEY || '';
-  const rawFrom = process.env.FROM_EMAIL || 'IT Solutions <onboarding@resend.dev>';
+  const rawFrom = process.env.FROM_EMAIL || 'IT Solutions <info@itsolutions.team>';
   const toList = (process.env.TO_EMAIL || '')
     .split(',')
     .map(s => s.trim())
     .filter(Boolean);
 
   // Страховка: если from указывает на не верифицированный домен — шлём с resend.dev
-  const from = /@itfix\.kz>/i.test(rawFrom)
+  const from = /@itsolutions\.team>/i.test(rawFrom)
     ? 'IT Solutions <onboarding@resend.dev>'
     : rawFrom;
 
@@ -41,7 +41,7 @@ export const handler = async (event) => {
       body: JSON.stringify({
         from,
         to: toList,
-        subject: 'Новая заявка с сайта itfix.kz',
+        subject: 'Новая заявка с сайта itsolutions.team',
         text: `Имя: ${name}\nТелефон: ${phone}\nEmail: ${email}\nКомментарий: ${comment}\n\nКалькулятор:\n${calc || '(нет)'}`
       })
     });
