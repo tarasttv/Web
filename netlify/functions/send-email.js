@@ -15,7 +15,7 @@ exports.handler = async (event) => {
 
   const hasKey = !!process.env.RESEND_API_KEY;
   const TO = process.env.TO_EMAIL || 'info@itfix.kz';
-  const FROM = process.env.FROM_EMAIL || 'IT Solutions <onboarding@resend.dev>';
+  const FROM = process.env.FROM_EMAIL || 'IT Solutions <no-reply@itfix.kz>';
 
   let attempted = false;
   let dataId = null;
