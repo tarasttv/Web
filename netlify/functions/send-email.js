@@ -1,62 +1,47 @@
-// netlify/functions/send-email.js
-export const handler = async (event) => {
-  if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: 'Method Not Allowed' };
-  }
+import Resend from 'resend';
 
-  const key = process.env.RESEND_API_KEY || '';
-  const rawFrom = process.env.FROM_EMAIL || 'IT Solutions <info@itsolutions.team>';
-  const toList = (process.env.TO_EMAIL || '')
-    .split(',')
-    .map(s => s.trim())
-    .filter(Boolean);
-
-  // Страховка: если from указывает на не верифицированный домен — шлём с resend.dev
-  const from = /@itsolutions\.team>/i.test(rawFrom)
-    ? 'IT Solutions <onboarding@resend.dev>'
-    : rawFrom;
-
-  // Логи для Netlify → Functions → send-email → Logs
-  console.log('send-email env', { hasKey: !!key, from, toList });
-
-  if (!key) {
-    return { statusCode: 500, body: JSON.stringify({ ok:false, error:'Missing RESEND_API_KEY' }) };
-  }
-  if (!toList.length) {
-    return { statusCode: 500, body: JSON.stringify({ ok:false, error:'Missing TO_EMAIL' }) };
-  }
-
-  let payload = {};
-  try { payload = JSON.parse(event.body || '{}'); } catch { /* ignore */ }
-
-  const { name = '', phone = '', email = '', comment = '', calc = '' } = payload;
-
+export async function handler(event) {
   try {
-    const res = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${key}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        from,
-        to: toList,
-        subject: 'Новая заявка с сайта itsolutions.team',
-        text: `Имя: ${name}\nТелефон: ${phone}\nEmail: ${email}\nКомментарий: ${comment}\n\nКалькулятор:\n${calc || '(нет)'}`
-      })
-    });
+    const { name, phone, email, comment } = JSON.parse(event.body);
 
-    const data = await res.json().catch(() => ({}));
+    // ✅ читаем только из переменных окружения
+    const resendApiKey = process.env.RESEND_API_KEY;
+    const from = process.env.FROM_EMAIL;    // IT Solutions <no-reply@itsolutions.team>
+    const to = process.env.TO_EMAIL;        // info@itsolutions.team
 
-    if (!res.ok) {
-      const reason = data?.message || data?.error || data?.name || JSON.stringify(data);
-      console.error('Resend error:', reason);
-      return { statusCode: 500, body: JSON.stringify({ ok:false, error: reason }) };
+    if (!resendApiKey || !from || !to) {
+      console.error("Missing environment variables", { resendApiKey: !!resendApiKey, from, to });
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ ok: false, error: "Missing environment variables" }),
+      };
     }
 
-    return { statusCode: 200, body: JSON.stringify({ ok:true, id: data?.id || null }) };
-  } catch (e) {
-    console.error('send-email exception:', e);
-    return { statusCode: 500, body: JSON.stringify({ ok:false, error: e?.message || 'send_failed' }) };
+    const resend = new Resend(resendApiKey);
+
+    const result = await resend.emails.send({
+      from,
+      to,
+      subject: `Новая заявка с сайта от ${name || "клиент"}`,
+      text: `
+Имя: ${name || "-"}
+Телефон: ${phone || "-"}
+Email: ${email || "-"}
+Комментарий: ${comment || "-"}
+      `,
+    });
+
+    console.log("Resend response:", result);
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ ok: true, result }),
+    };
+  } catch (err) {
+    console.error("Resend error:", err);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ ok: false, error: err.message }),
+    };
   }
-};
+}
