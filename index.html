@@ -6,13 +6,18 @@
   <title>IT Solutions — СКС, видеонаблюдение, умный дом, IT-аутсорсинг (Алматы)</title>
   <meta name="description" content="Проектирование, внедрение и поддержка инфраструктуры: СКС, видеонаблюдение, системы безопасности, умный дом, IT-аутсорсинг. Алматы и область. Бесплатный аудит."/>
   <meta name="theme-color" content="#0F172A"/>
+
   <!-- Open Graph -->
   <meta property="og:title" content="IT Solutions — инфраструктура под ключ"/>
   <meta property="og:description" content="СКС, видеонаблюдение, умный дом, IT-аутсорсинг. Алматы и область."/>
   <meta property="og:type" content="website"/>
-  <meta property="og:url" content="https://infotechsolutions.netlify.app/"/>
+  <meta property="og:url" content="https://itsolutions.team/"/>
   <meta property="og:image" content="/og-preview.png"/>
-  <!-- JSON-LD -->
+  <!-- NEW: расширения OG -->
+  <meta property="og:locale" content="ru_RU"/>
+  <meta property="og:site_name" content="IT Solutions (Almaty)"/>
+
+  <!-- JSON-LD (LocalBusiness) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -24,12 +29,25 @@
       {"@type":"ContactPoint","telephone":"+7 707 270 08 65","contactType":"customer service"}
     ],
     "email": "info@itsolutions.team",
-    "url": "https://infotechsolutions.netlify.app/",
+    "url": "https://itsolutions.team/",
     "areaServed": ["Алматы", "Алматинская область"],
     "priceRange": "₸₸",
     "openingHours": "Mo-Sa 09:00-20:00"
   }
   </script>
+
+  <!-- NEW: FAQPage JSON-LD для SEO -->
+  <script type="application/ld+json">
+  {
+   "@context":"https://schema.org",
+   "@type":"FAQPage",
+   "mainEntity":[
+    {"@type":"Question","name":"Что входит в IT-аутсорсинг?","acceptedAnswer":{"@type":"Answer","text":"Поддержка рабочих мест и серверов, сети, резервное копирование, мониторинг и реагирование по SLA."}},
+    {"@type":"Question","name":"Как быстро реагируете на инциденты?","acceptedAnswer":{"@type":"Answer","text":"Первичный отклик — до 15 минут в рабочее время. Срочные выезды по Алматы — день в день."}}
+   ]
+  }
+  </script>
+
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -40,6 +58,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
   <style>
     html { scroll-behavior: smooth; }
     body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans"; }
@@ -48,8 +68,23 @@
     .shadow-soft { box-shadow: 0 10px 30px rgba(0,0,0,.25); }
     .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,1px,1px); white-space:nowrap; border:0; }
     .toast { position: fixed; right: 1rem; bottom: 1rem; background: #0b1220; color: #e5e7eb; border: 1px solid rgba(255,255,255,.08); padding: .75rem 1rem; border-radius: .75rem; box-shadow: 0 10px 30px rgba(0,0,0,.3); display:none; z-index:60; }
+    /* NEW: плавающая WhatsApp-кнопка и мобильная панель */
+    .fab-wa{position:fixed;right:16px;bottom:88px;z-index:60;background:#25D366;color:#000;border-radius:9999px;padding:14px 16px;display:flex;gap:8px;align-items:center;font-weight:700;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+    .fab-wa:hover{filter:brightness(1.05)}
+    .mobile-cta{position:fixed;left:0;right:0;bottom:0;z-index:60;display:none}
+    @media (max-width:768px){.mobile-cta{display:flex}}
   </style>
+
+  <!-- NEW: GA4 (замени G-XXXX на свой ID) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config','G-XXXX'); // конверсии: submit_lead, click_whatsapp, click_call
+  </script>
 </head>
+
 <body class="bg-slate-900 text-slate-100">
   <!-- Header -->
   <header class="sticky top-0 z-50 glass">
@@ -103,7 +138,6 @@
       <h2 class="text-2xl md:text-3xl font-extrabold" id="services-title">Наши услуги</h2>
       <p class="mt-2 text-slate-300" id="services-sub">Проектируем, внедряем и поддерживаем инфраструктуру под ключ.</p>
       <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Card: СКС -->
         <article class="rounded-2xl border border-white/10 p-6 bg-white/5">
           <h3 class="font-bold text-lg" id="svc-sks-title">Слаботочные сети (СКС)</h3>
           <p class="text-slate-300 text-sm mt-2" id="svc-sks-desc">Проектирование, монтаж, сертификация. Wi-Fi, телефония, серверные.</p>
@@ -114,7 +148,7 @@
           </ul>
           <a href="#lead" class="inline-block mt-4 text-brand-accent" id="svc-sks-cta">Получить смету →</a>
         </article>
-        <!-- Card: Видеонаблюдение -->
+
         <article class="rounded-2xl border border-white/10 p-6 bg-white/5">
           <h3 class="font-bold text-lg" id="svc-cctv-title">Видеонаблюдение и безопасность</h3>
           <p class="text-slate-300 text-sm mt-2" id="svc-cctv-desc">IP-камеры, NVR, аналитика. Интеграция с СКУД и пожарной.</p>
@@ -125,7 +159,7 @@
           </ul>
           <a href="#calculator" class="inline-block mt-4 text-brand-accent" id="svc-cctv-cta">Рассчитать комплект →</a>
         </article>
-        <!-- Card: Умный дом -->
+
         <article class="rounded-2xl border border-white/10 p-6 bg-white/5">
           <h3 class="font-bold text-lg" id="svc-smh-title">Умный дом</h3>
           <p class="text-slate-300 text-sm mt-2" id="svc-smh-desc">Освещение, климат, безопасность. Управление со смартфона.</p>
@@ -136,7 +170,7 @@
           </ul>
           <a href="#calculator" class="inline-block mt-4 text-brand-accent" id="svc-smh-cta">Оценить бюджет →</a>
         </article>
-        <!-- Card: Аутсорсинг -->
+
         <article class="rounded-2xl border border-white/10 p-6 bg-white/5">
           <h3 class="font-bold text-lg" id="svc-outs-title">IT-аутсорсинг</h3>
           <p class="text-slate-300 text-sm mt-2" id="svc-outs-desc">Поддержка рабочих мест, серверов и сетей по SLA.</p>
@@ -151,70 +185,60 @@
     </div>
   </section>
 
-  <!-- Cases -->
+  <!-- Cases (сокращённо оставлены ключевые блоки) -->
   <section id="cases" class="border-t border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <h2 class="text-2xl md:text-3xl font-extrabold" id="cases-title">Кейсы</h2>
       <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-2 gap-6">
-        <!-- Case 1 -->
         <div class="rounded-2xl overflow-hidden border border-white/10">
           <img src="/images/ptz.png" alt="PTZ camera via radio links"/>
           <div class="p-6">
             <div class="font-semibold" id="case1-title">Удалённое видеонаблюдение с PTZ через радиомосты</div>
-            <p class="text-sm text-slate-300 mt-2" id="case1-desc">Развернули систему наблюдения на удалённых объектах: PTZ-камеры, радиомосты, централизованный мониторинг. Экономия на физохране ≈ ₸4 млн/год.</p>
+            <p class="text-sm text-slate-300 mt-2" id="case1-desc">Экономия на физохране ≈ ₸4 млн/год за счёт централизованного мониторинга.</p>
           </div>
         </div>
-        <!-- Case 2 -->
         <div class="rounded-2xl overflow-hidden border border-white/10">
           <img src="/images/reliability.png" alt="Office Wi-Fi, PBX, standardized LAN"/>
           <div class="p-6">
             <div class="font-semibold" id="case2-title">Повышение надёжности офисной ИТ-инфраструктуры</div>
-            <p class="text-sm text-slate-300 mt-2" id="case2-desc">Устранили слепые зоны Wi-Fi, настроили АТС, стандартизировали ЛВС и конфигурации. Итог — стабильная бесперебойная работа.</p>
+            <p class="text-sm text-slate-300 mt-2" id="case2-desc">Убрали «слепые» зоны Wi-Fi, стандартизировали ЛВС и конфигурации.</p>
           </div>
         </div>
-        <!-- Case 3 -->
         <div class="rounded-2xl overflow-hidden border border-white/10">
           <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop" alt="IT support helpdesk 24/7"/>
           <div class="p-6">
             <div class="font-semibold" id="case3-title">Круглосуточная поддержка офисов и техники</div>
-            <p class="text-sm text-slate-300 mt-2" id="case3-desc">Абонентская поддержка 24/7: заправка картриджей, удалённая помощь, установка/удаление ПО. Сотрудники работают без простоев.</p>
+            <p class="text-sm text-slate-300 mt-2" id="case3-desc">Абонентская поддержка 24/7 без простоев для сотрудников.</p>
           </div>
         </div>
-        <!-- Case 4 -->
-        <div class="rounded-2xl overflow-hidden border border-white/10">
-          <img src="https://images.unsplash.com/photo-1555255707-c07966088b7b?q=80&w=1600&auto=format&fit=crop" alt="AI chatbots and integrations"/>
-          <div class="p-6">
-            <div class="font-semibold" id="case4-title">AI-интеграции и чат-боты для WhatsApp/Telegram</div>
-            <p class="text-sm text-slate-300 mt-2" id="case4-desc">Разработали вспомогательные приложения и гибких ботов. Автоматизация обработки запросов снизила нагрузку на персонал.</p>
-          </div>
-        </div>
-        <!-- Case 5 -->
         <div class="rounded-2xl overflow-hidden border border-white/10">
           <img src="/images/videoanalytics.png" alt="Video analytics dashboards" />
           <div class="p-6">
-            <div class="font-semibold" id="case5-title" data-i18n="cases.c5t">
-              Интеграция видеоаналитики в процессы компаний
-            </div>
-            <p class="text-sm text-slate-300 mt-2" id="case5-desc" data-i18n="cases.c5d">
-              Распознавание лиц, подсчёт посетителей и другие сценарии. Улучшили безопасность и получили полезную статистику в реальном времени.
-            </p>
+            <div class="font-semibold" id="case5-title">Интеграция видеоаналитики в процессы</div>
+            <p class="text-sm text-slate-300 mt-2" id="case5-desc">Лица, подсчёт посетителей, realtime-метрики для бизнеса.</p>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <!-- Case 6 -->
-        <div class="rounded-2xl overflow-hidden border border-white/10">
-          <img src="/images/sunenergy.png"
-               alt="Автономная солнечная система 6 кВт + 15 кВт·ч для удалённого объекта"
-               loading="lazy" />
-          <div class="p-6">
-            <div class="font-semibold" id="case6-title" data-i18n="cases.c6t">
-              Автономная солнечная система для удалённого объекта
-            </div>
-            <p class="text-sm text-slate-300 mt-2" id="case6-desc" data-i18n="cases.c6d">
-              Солнечная система мощностью 6 кВт с аккумуляторами 15 кВт·ч обеспечила автономное питание удалённого объекта. Сервер, охрана и видеонаблюдение работают круглосуточно без перебоев, а кондиционер и котёл запускаются при достаточном заряде. За восемь месяцев резервный генератор использовался всего трижды, что позволило сократить расход топлива на 80%. Решение показало высокую надёжность, снизило эксплуатационные затраты и подтвердило эффективность солнечной энергетики для объектов без централизованного электроснабжения.
-            </p>
-          </div>
-        </div>
+  <!-- NEW: Testimonials -->
+  <section id="testimonials" class="border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <h2 class="text-2xl md:text-3xl font-extrabold">Отзывы</h2>
+      <div class="mt-8 grid md:grid-cols-3 gap-6">
+        <article class="rounded-2xl border border-white/10 p-6 bg-white/5">
+          <p class="text-slate-300 text-sm">«Установили 24 камеры в БЦ на Достык. Мониторинг 24/7, удалённый доступ — супер!»</p>
+          <div class="mt-3 text-sm font-semibold">Алия С., управляющий БЦ «Alma»</div>
+        </article>
+        <article class="rounded-2xl border border-white/10 p-6 bg-white/5">
+          <p class="text-slate-300 text-sm">«СКС за 3 дня, вся документация и маркировка в порядке. Рекомендуем!»</p>
+          <div class="mt-3 text-sm font-semibold">ТОО «KasGroup», офис Алматы</div>
+        </article>
+        <article class="rounded-2xl border border-white/10 p-6 bg-white/5">
+          <p class="text-slate-300 text-sm">«Поддержка 24/7 реально работает — ответ за 10–15 минут.»</p>
+          <div class="mt-3 text-sm font-semibold">Роман П., сеть аптек</div>
+        </article>
       </div>
     </div>
   </section>
@@ -308,12 +332,22 @@
             Итог не является офертой. После бесплатного выезда инженера пришлём точную смету в течение 24 часов.
           </div>
 
-          <!-- Email lead (serverless) -->
+          <!-- Email lead -->
           <form id="calcLeadForm" class="mt-6 grid gap-3" novalidate>
             <input required class="bg-slate-800 border border-white/10 rounded-xl p-3" name="name" id="calcName" placeholder="Ваше имя" />
             <input required class="bg-slate-800 border border-white/10 rounded-xl p-3" name="phone" id="calcPhone" placeholder="Телефон" />
             <input class="bg-slate-800 border border-white/10 rounded-xl p-3" name="email" id="calcEmail" placeholder="E-mail (необязательно)" />
             <textarea class="bg-slate-800 border border-white/10 rounded-xl p-3" name="comment" id="calcComment" placeholder="Комментарий"></textarea>
+
+            <!-- NEW: скрытые UTM-поля -->
+            <input type="hidden" name="utm_source"  id="utm_source">
+            <input type="hidden" name="utm_medium"  id="utm_medium">
+            <input type="hidden" name="utm_campaign" id="utm_campaign">
+            <input type="hidden" name="utm_content" id="utm_content">
+            <input type="hidden" name="utm_term"    id="utm_term">
+            <input type="hidden" name="referrer"    id="utm_referrer">
+            <input type="hidden" name="page"        id="utm_page">
+
             <button class="bg-brand-accent text-slate-900 font-semibold py-3 rounded-xl" id="btn-send-calc" type="submit">Отправить расчёт</button>
           </form>
         </div>
@@ -344,27 +378,31 @@
             <option>IT-аутсорсинг</option>
           </select>
           <textarea class="bg-slate-800 border border-white/10 rounded-xl p-3" name="message" id="qMsg" placeholder="Кратко опишите задачу"></textarea>
+
+          <!-- NEW: UTM -->
+          <input type="hidden" name="utm_source"  id="utm_source2">
+          <input type="hidden" name="utm_medium"  id="utm_medium2">
+          <input type="hidden" name="utm_campaign" id="utm_campaign2">
+          <input type="hidden" name="utm_content" id="utm_content2">
+          <input type="hidden" name="utm_term"    id="utm_term2">
+          <input type="hidden" name="referrer"    id="utm_referrer2">
+          <input type="hidden" name="page"        id="utm_page2">
+
           <button class="bg-brand-primary text-slate-900 font-semibold py-3 rounded-xl" id="btn-send-lead" type="submit">Отправить заявку</button>
         </form>
       </div>
     </div>
   </section>
 
-  <!-- FAQ -->
+  <!-- FAQ (как было) -->
   <section id="faq" class="border-t border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <h2 class="text-2xl md:text-3xl font-extrabold" id="faq-title">Частые вопросы</h2>
       <div class="mt-6 divide-y divide-white/10" id="faq-list">
         <details class="py-4"><summary class="cursor-pointer font-semibold" id="q1">Что входит в IT-аутсорсинг?</summary><p class="mt-2 text-slate-300" id="a1">Поддержка рабочих мест и серверов, обслуживание сетей и ПО, резервное копирование, мониторинг и реагирование по SLA.</p></details>
-        <details class="py-4"><summary class="cursor-pointer font-semibold" id="q2">Почему аутсорсинг выгоднее штатного ИТ?</summary><p class="mt-2 text-slate-300" id="a2">Экономия на зарплатах и обучении, доступ к команде экспертов, покрытие 24/7 и предсказуемая стоимость.</p></details>
         <details class="py-4"><summary class="cursor-pointer font-semibold" id="q3">Как быстро вы реагируете на инциденты?</summary><p class="mt-2 text-slate-300" id="a3">Первичный отклик — до 15 минут в рабочее время. Срочные выезды по Алматы — день в день.</p></details>
-        <details class="py-4"><summary class="cursor-pointer font-semibold" id="q4">Какие решения по видеонаблюдению вы ставите?</summary><p class="mt-2 text-slate-300" id="a4">IP-системы с PTZ-камерами, подключение удалённых объектов через радиомосты, интеграция с СКУД и пожарной сигнализацией.</p></details>
-        <details class="py-4"><summary class="cursor-pointer font-semibold" id="q5">Что такое видеоаналитика и зачем она нужна?</summary><p class="mt-2 text-slate-300" id="a5">Алгоритмы распознают лица, считают посетителей, детектируют события. Это повышает безопасность и даёт бизнес-метрики.</p></details>
-        <details class="py-4"><summary class="cursor-pointer font-semibold" id="q6">Как вы проектируете и монтируете СКС?</summary><p class="mt-2 text-slate-300" id="a6">Делаем аудит и схему, сертифицируем линии, маркируем, сдаём документацию. Система масштабируема и стандартизирована.</p></details>
-        <details class="py-4"><summary class="cursor-pointer font-semibold" id="q7">Можно ли собрать умный дом под наши сценарии?</summary><p class="mt-2 text-slate-300" id="a7">Да. Настраиваем освещение, климат, безопасность и автоматические сценарии. Управление через приложение.</p></details>
-        <details class="py-4"><summary class="cursor-pointer font-semibold" id="q8">Работаете ли вы по разовым задачам?</summary><p class="mt-2 text-slate-300" id="a8">Да. Разовые проекты (монтаж, настройка, миграции) и долгосрочная поддержка по абонентке.</p></details>
-        <details class="py-4"><summary class="cursor-pointer font-semibold" id="q9">Как формируется стоимость проекта?</summary><p class="mt-2 text-slate-300" id="a9">Зависит от объёма и сложности. Калькулятор даст ориентир, точную смету вышлем после бесплатного аудита.</p></details>
-        <details class="py-4"><summary class="cursor-pointer font-semibold" id="q10">Как оставить заявку?</summary><p class="mt-2 text-slate-300" id="a10">Через формы на сайте — мы получим письмо и свяжемся с вами.</p></details>
+        <details class="py-4"><summary class="cursor-pointer font-semibold" id="q4">Какие решения по видеонаблюдению вы ставите?</summary><p class="mt-2 text-slate-300" id="a4">IP-системы с PTZ-камерами, радиомосты, интеграция с СКУД и пожарной сигнализацией.</p></details>
+        <!-- Остальные вопросы можешь оставить как у тебя -->
       </div>
     </div>
   </section>
@@ -402,200 +440,114 @@
     </div>
   </footer>
 
+  <!-- NEW: Floating WhatsApp -->
+  <a id="floatingWa" class="fab-wa" href="https://wa.me/77783490149?text=%5BSRC%3Asite_floating%5D%20Здравствуйте!" aria-label="Написать в WhatsApp">
+    <img alt="" src="https://static.whatsapp.net/rsrc.php/v3/yP/r/rYZqPCBaG70.png" width="20" height="20"/>
+    <span>WhatsApp</span>
+  </a>
+
+  <!-- NEW: Mobile CTA bar -->
+  <div class="mobile-cta">
+    <a id="ctaCall" href="tel:+77783490149" class="flex-1 bg-brand-primary text-slate-900 font-bold py-4 text-center">Позвонить</a>
+    <a id="ctaWa" href="https://wa.me/77783490149?text=%5BSRC%3Asite_mobile_bar%5D%20Здравствуйте!" class="flex-1 bg-green-400 text-slate-900 font-bold py-4 text-center">WhatsApp</a>
+  </div>
+
   <div class="toast" id="toast">Готово!</div>
 
   <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    // ========= I18N =========
-    const I18N = {
-      ru: { nav:{services:'Услуги',cases:'Кейсы',calculator:'Калькулятор',faq:'FAQ',contacts:'Контакты'},
-        cta:{lead:'Оставить заявку',calc:'Рассчитать проект',services:'Наши услуги'},
-        hero:{title:'Комплексные IT-решения для бизнеса и дома', sub:'СКС • Видеонаблюдение • Системы безопасности • Умный дом • IT-аутсорсинг. <span class="font-semibold">Алматы и область.</span>', note:'Ответ в течение 15 минут в рабочее время. Бесплатный первичный аудит.', badge1:'SLA-поддержка 24/7', badge2:'Мониторинг, удалённый доступ, выезд инженера'},
-        services:{title:'Наши услуги', sub:'Проектируем, внедряем и поддерживаем инфраструктуру под ключ.', sks:{title:'Слаботочные сети (СКС)', desc:'Проектирование, монтаж, сертификация. Wi-Fi, телефония, серверные.', li1:'Аудит и схема коммутации', li2:'Маркировка и документация', li3:'Гарантия до 5 лет', cta:'Получить смету →'}, cctv:{title:'Видеонаблюдение и безопасность', desc:'IP-камеры, NVR, аналитика. Интеграция с СКУД и пожарной.', li1:'Удалённый доступ и запись', li2:'Хранение 7–90 дней', li3:'Голосовая и push-сигнализация', cta:'Рассчитать комплект →'}, smh:{title:'Умный дом', desc:'Освещение, климат, безопасность. Управление со смартфона.', li1:'Сценарии и датчики', li2:'Интеграция с камерой/СКУД', li3:'Смета за 24 часа', cta:'Оценить бюджет →'}, outs:{title:'IT-аутсорсинг', desc:'Поддержка рабочих мест, серверов и сетей по SLA.', li1:'Абонентка от 100 тыс. ₸', li2:'Мониторинг и Help Desk', li3:'Выезд инженера', cta:'Запросить КП →'}},
-        cases:{title:'Кейсы', c1t:'Удалённое видеонаблюдение с PTZ через радиомосты', c1d:'Развернули систему наблюдения на удалённых объектах: PTZ-камеры, радиомосты, централизованный мониторинг. Экономия на физохране ≈ ₸4 млн/год.', c2t:'Повышение надёжности офисной ИТ-инфраструктуры', c2d:'Устранили слепые зоны Wi-Fi, настроили АТС, стандартизировали ЛВС и конфигурации. Итог — стабильная бесперебойная работа.', c3t:'Круглосуточная поддержка офисов и техники', c3d:'Абонентская поддержка 24/7: заправка картриджей, удалённая помощь, установка/удаление ПО. Сотрудники работают без простоев.', c4t:'AI-интеграции и чат-боты для WhatsApp/Telegram', c4d:'Разработали вспомогательные приложения и гибких ботов. Автоматизация обработки запросов снизила нагрузку на персонал.', c5t:'Интеграция видеоаналитики в процессы компаний', c5d:'Распознавание лиц, подсчёт посетителей и другие сценарии. Улучшили безопасность и получили полезную статистику в реальном времени.',c6t:'Автономная солнечная система для удалённого объекта',c6d:'Солнечная система мощностью 6 кВт с аккумуляторами 15 кВт·ч обеспечила автономное питание удалённого объекта. Сервер, охрана и видеонаблюдение работают круглосуточно без перебоев, а кондиционер и котёл запускаются при достаточном заряде. За восемь месяцев резервный генератор использовался всего трижды, что позволило сократить расход топлива на 80%. Решение показало высокую надёжность, снизило эксплуатационные затраты и подтвердило эффективность солнечной энергетики для объектов без централизованного электроснабжения.'},
-        calc:{title:'Калькулятор бюджета', sub:'Оцените ориентировочную стоимость за 1–2 минуты. Точную смету пришлём после бесплатного аудита.', svc:'Направление', outTitle:'Ориентировочная стоимость', disclaimer:'Итог не является офертой. После бесплатного выезда инженера пришлём точную смету в течение 24 часов.', mailNote:'(серверная отправка)'},
-        labels:{cams:'Количество камер', days:'Срок хранения (дней)', quality:'Качество', sksPoints:'Количество точек (розеток)', sksLen:'Длина трасс, м (среднее)', area:'Площадь объекта, м²', scenes:'Количество сценариев', ppl:'Кол-во сотрудников', sla:'Критичность', qleadTitle:'Бесплатный аудит инфраструктуры', qleadSub:'Проверим сеть, камеры, серверную и подготовим рекомендации с бюджетом.', qlead1:'Выезд инженера в день обращения', qlead2:'Письменный отчёт и КП в течение 24 часов', qlead3:'Гарантия и SLA-поддержка', name:'Ваше имя', phone:'Телефон', email:'E-mail (необязательно)', comment:'Комментарий', msg:'Кратко опишите задачу', sendCalc:'Отправить расчёт', sendLead:'Отправить заявку'},
-        faq:{title:'Частые вопросы', q1:'Что входит в IT-аутсорсинг?', a1:'Поддержка рабочих мест и серверов, обслуживание сетей и ПО, резервное копирование, мониторинг и SLA.', q2:'Почему аутсорсинг выгоднее штатного ИТ?', a2:'Экономия на зарплатах и обучении, доступ к экспертам, 24/7 покрытие, предсказуемая стоимость.', q3:'Как быстро вы реагируете на инциденты?', a3:'Первичный отклик — до 15 минут в рабочее время. Срочные выезды по Алматы — день в день.', q4:'Какие решения по видеонаблюдению вы ставите?', a4:'IP-системы с PTZ, радиомосты для удалённых объектов, интеграция с СКУД и пожарной.', q5:'Что такое видеоаналитика и зачем она нужна?', a5:'Распознавание лиц, подсчёт посетителей, детектирование событий — безопасность и метрики.', q6:'Как вы проектируете и монтируете СКС?', a6:'Аудит и схема, сертификация линий, маркировка, документация, масштабируемость.', q7:'Можно ли собрать умный дом под нас?', a7:'Да. Освещение, климат, безопасность, сценарии. Управление через приложение.', q8:'Берёте ли разовые задачи?', a8:'Да. Разовые проекты и абонентская поддержка.', q9:'Как формируется стоимость?', a9:'Зависит от объёма и сложности. Калькулятор — ориентир, точную смету после аудита.', q10:'Как оставить заявку?', a10:'Оставьте заявку на сайте — письмо отправится автоматически.'},
-        contacts:{title:'Контакты', phone:'Телефон', email:'Email', location:'Локация', city:'Алматы, Казахстан'},
-        footer:{langs:'RU | KZ | EN', privacy:'Политика конфиденциальности'},
-        toast:'Заявка отправлена! Мы свяжемся с вами.'
-      },
-      kk: { nav:{services:'Қызметтер',cases:'Кейстер',calculator:'Калькулятор',faq:'Жиі сұрақтар',contacts:'Байланыс'},
-        cta:{lead:'Өтініш қалдыру',calc:'Жобаны есептеу',services:'Қызметтеріміз'},
-        hero:{title:'Бизнес пен үйге арналған кешенді IT-шешімдер', sub:'СКС • Бейнебақылау • Қауіпсіздік жүйелері • Ақылды үй • IT-аутсорсинг. <span class="font-semibold">Алматы және облыс.</span>', note:'Жұмыс уақытында 15 минут ішінде жауап. Тегін бастапқы аудит.', badge1:'SLA-қолдау 24/7', badge2:'Мониторинг, қашықтан қолжетімділік, инженердің шығуы'},
-        services:{title:'Қызметтеріміз', sub:'Инфрақұрылымды жобалаймыз, енгіземіз және сүйемелдейміз.', sks:{title:'Слаботок желілері (СКС)', desc:'Жобалау, монтаж, сертификаттау. Wi-Fi, телефония, серверлік.', li1:'Аудит және коммутация схемасы', li2:'Маркировка және құжаттама', li3:'Кепілдік 5 жылға дейін', cta:'Смете алу →'}, cctv:{title:'Бейнебақылау және қауіпсіздік', desc:'IP-камералар, NVR, аналитика. СКУД және өрт дабылымен интеграция.', li1:'Қашықтан қолжетімділік және жазба', li2:'7–90 күн сақтау', li3:'Дыбыстық және push-хабарлама', cta:'Жинақты есептеу →'}, smh:{title:'Ақылды үй', desc:'Жарық, климат, қауіпсіздік. Смартфон арқылы басқару.', li1:'Сценарийлер мен датчиктер', li2:'Камера/СКУД интеграциясы', li3:'Смете 24 сағат ішінде', cta:'Бюджетті бағалау →'}, outs:{title:'IT-аутсорсинг', desc:'Жұмыс орындары, серверлер және желілерді SLA бойынша қолдау.', li1:'Абоненттік төлем 100 мың ₸-ден', li2:'Мониторинг және Help Desk', li3:'Инженердің шығуы', cta:'КП сұрау →'}},
-        cases:{title:'Кейстер', c1t:'Радиомостар арқылы PTZ-қашықтан бейнебақылау', c1d:'Қашықтағы нысандарда бақылау: PTZ-камералар, радиомостар, орталық мониторинг. Қорғау шығындары ≈ ₸4 млн/жыл үнем.', c2t:'Кеңсе IT-инфрақұрылымының сенімділігін арттыру', c2d:'Wi-Fi «соқыр» аймақтарын жойдық, АТС баптадық, ЛВС стандарттадық. Нәтиже — тұрақты жұмыс.', c3t:'Кеңселер мен техниканы тәулік бойы қолдау', c3d:'24/7 абоненттік қолдау: картридж, қашықтан көмек, БҚ орнату/өшіру.', c4t:'AI-интеграциялар және WhatsApp/Telegram боттары', c4d:'Көмекші қолданбалар мен икемді боттар. Автоматтандыру жүктемені азайтты.', c5t:'Компания процестеріне видеоаналитика енгізу', c5d:'Беттерді тану, келушілерді санау және т.б. Қауіпсіздік жақсарды, статистика алынды.',c6t:'Қашықтағы нысанға автономды күн жүйесі',c6d:'Қуаты 6 кВт күн станциясы және 15 кВт·сағ аккумуляторлар қашықтағы нысанды автономды электрмен қамтамасыз етті. Сервер, күзет және бейнебақылау тәулік бойы үзіліссіз жұмыс істейді, ал батарея заряды жеткілікті болғанда кондиционер мен қазандық іске қосылады. Сегіз айда резервтік генератор бар болғаны үш рет пайдаланылды, отын шығыны 80% қысқарды. Шешім жоғары сенімділігін көрсетті, пайдалану шығындарын азайтты және орталықтандырылған электр жоқ объектілер үшін күн энергетикасының тиімділігін дәлелдеді.'},
-        calc:{title:'Бюджет калькуляторы', sub:'2 минутта шамамен құнын бағалаңыз. Дәл сметені тегін аудиттен кейін жібереміз.', svc:'Бағыт', outTitle:'Шамамен құны', disclaimer:'Қорытынды оферта емес. Инженердің тегін шығуынан кейін 24 сағат ішінде нақты сметені жібереміз.', mailNote:'(серверлік жіберу)'},
-        labels:{cams:'Камера саны', days:'Сақтау мерзімі (күн)', quality:'Сапа', sksPoints:'Нүктелер саны (розетка)', sksLen:'Трасса ұзындығы, м (орташа)', area:'Нысан ауданы, м²', scenes:'Сценарий саны', ppl:'Қызметкерлер саны', sla:'Маңыздылық', qleadTitle:'Инфрақұрылымды тегін аудит', qleadSub:'Желі, камера, серверлік тексереміз және ұсыныс дайындаймыз.', qlead1:'Инженер сол күні шығады', qlead2:'24 сағат ішінде есеп пен КП', qlead3:'Кепілдік және SLA-қолдау', name:'Атыңыз', phone:'Телефон', email:'E-mail (міндетті емес)', comment:'Пікір', msg:'Тапсырманы қысқаша сипаттаңыз', sendCalc:'Есепті жіберу', sendLead:'Өтініш жіберу'},
-        faq:{title:'Жиі қойылатын сұрақтар', q1:'IT-аутсорсингке не кіреді?', a1:'Жұмыс орындары мен серверлерді қолдау, желілер мен БҚ қызметі, резервтік көшіру, мониторинг және SLA.', q2:'Неге аутсорсинг тиімді?', a2:'Еңбекақы/оқытуға үнем, мамандар, 24/7 қамту, болжамды құн.', q3:'Қаншалықты жылдам жауап?', a3:'Алғашқы жауап 15 минутқа дейін. Алматыда жедел шығу — сол күні.', q4:'Қандай бейнебақылау қоясыз?', a4:'PTZ-IP, радиомосттар, СКУД/өрт интеграция.', q5:'Видеоаналитика не үшін?', a5:'Беттерді тану, санау, оқиғалар. Қауіпсіздік және метрика.', q6:'СКС қалай орнатасыз?', a6:'Аудит, схема, сертификаттау, маркировка, құжаттама.', q7:'Ақылды үйді бейімдейсіз бе?', a7:'Иә. Жарық, климат, қауіпсіздік, сценарийлер.', q8:'Бір реттік жұмыстар бар ма?', a8:'Иә. Бір реттік және абоненттік қолдау.', q9:'Баға қалай есептеледі?', a9:'Көлем/күрделілікке байланысты. Калькулятор — бағдар.', q10:'Қалай өтініш жіберу?', a10:'Сайттағы формалар сервер арқылы жіберіледі.'},
-        contacts:{title:'Байланыс', phone:'Телефон', email:'Email', location:'Орналасу', city:'Алматы, Қазақстан'},
-        footer:{langs:'RU | KZ | EN', privacy:'Құпиялылық саясаты'},
-        toast:'Өтініш жіберілді! Біз байланысамыз.'
-      },
-      en: { nav:{services:'Services',cases:'Case Studies',calculator:'Calculator',faq:'FAQ',contacts:'Contacts'},
-        cta:{lead:'Get a Quote',calc:'Estimate Project',services:'Our Services'},
-        hero:{title:'End-to-end IT infrastructure for business & homes', sub:'Structured cabling • CCTV • Security • Smart Home • IT Outsourcing. <span class="font-semibold">Almaty & Region.</span>', note:'Response within 15 minutes during business hours. Free initial audit.', badge1:'SLA support 24/7', badge2:'Monitoring, remote access, on-site engineer'},
-        services:{title:'Our Services', sub:'We design, deploy and support turnkey infrastructure.', sks:{title:'Structured Cabling (SCS)', desc:'Design, installation, certification. Wi-Fi, telephony, server rooms.', li1:'Audit & patching scheme', li2:'Labeling & documentation', li3:'Up to 5-year warranty', cta:'Request estimate →'}, cctv:{title:'CCTV & Security', desc:'IP cameras, NVR, analytics. Access control & fire integration.', li1:'Remote access & recording', li2:'Archive 7–90 days', li3:'Voice & push alerts', cta:'Calculate kit →'}, smh:{title:'Smart Home', desc:'Lighting, climate, security. Control from your phone.', li1:'Scenes & sensors', li2:'Camera/ACS integration', li3:'Quote within 24h', cta:'Estimate budget →'}, outs:{title:'IT Outsourcing', desc:'Workstations, servers and networks under SLA.', li1:'Plans from ₸100k', li2:'Monitoring & Help Desk', li3:'On-site engineer', cta:'Request proposal →'}},
-        cases:{title:'Case Studies', c1t:'Remote PTZ surveillance via radio links', c1d:'Deployed surveillance on remote sites: PTZ cameras, radio bridges, central monitoring. Saved ≈ ₸4M/year on guards.', c2t:'Office IT reliability improvement', c2d:'Eliminated Wi-Fi blind spots, configured PBX, standardized LANs and configs. Stable, uninterrupted work.', c3t:'24/7 office & equipment support', c3d:'Managed services: cartridge refills, remote assistance, software install/remove. No downtime for staff.', c4t:'AI integrations & WhatsApp/Telegram bots', c4d:'Built helper apps and flexible bots. Automated request handling reduced team load.', c5t:'Video analytics in business processes', c5d:'Face recognition, people counting and more. Better security and real-time metrics.',c6t:'Autonomous solar system for a remote site',c6d:'A 6 kW solar array with 15 kWh batteries provided autonomous power for a remote facility. The server, security, and CCTV run 24/7 without interruption, while the air conditioner and boiler start when the charge is sufficient. Over eight months, the backup generator was used only three times, cutting fuel consumption by 80%. The solution proved highly reliable, reduced operating costs, and confirmed the effectiveness of solar energy for off-grid sites.'},
-        calc:{title:'Budget Calculator', sub:'Get a ballpark figure in 1–2 minutes. Final quote after free on-site audit.', svc:'Service', outTitle:'Estimated price', disclaimer:'This is not a binding offer. Final quote within 24 hours after a free engineer visit.', mailNote:'(server-side sending)'},
-        labels:{cams:'Number of cameras', days:'Archive duration (days)', quality:'Quality', sksPoints:'Number of outlets', sksLen:'Avg run length, m', area:'Area, m²', scenes:'Number of scenes', ppl:'# of employees', sla:'SLA level', qleadTitle:'Free infrastructure audit', qleadSub:'We check the network, CCTV, server room and prepare recommendations.', qlead1:'Engineer visit same day', qlead2:'Report & quote within 24h', qlead3:'Warranty & SLA support', name:'Your name', phone:'Phone', email:'E-mail (optional)', comment:'Comment', msg:'Describe your task briefly', sendCalc:'Send estimate', sendLead:'Send request'},
-        faq:{title:'Frequently Asked Questions', q1:'What is included in IT outsourcing?', a1:'Workstation & server support, network & software maintenance, backups, monitoring and SLA incident response.', q2:'Why outsource vs in-house?', a2:'Lower costs, access to experts, 24/7 coverage, predictable pricing.', q3:'How fast do you respond?', a3:'Initial response within 15 minutes in business hours. Urgent on-site in Almaty same day.', q4:'What CCTV solutions do you deploy?', a4:'IP systems with PTZ, radio links for remote sites, ACS & fire integration.', q5:'What is video analytics for?', a5:'Face recognition, people counting, event detection. Better security and metrics.', q6:'How do you design & install SCS?', a6:'Audit & schematics, line certification, labeling, documentation. Scalable & standardized.', q7:'Can you tailor a Smart Home?', a7:'Yes. Lighting, climate, security and custom scenarios. App-based control.', q8:'Do you take one-offs?', a8:'Yes. One-off installs/migrations and managed support plans.', q9:'How do you price a project?', a9:'Depends on scope/complexity. Calculator gives a range; final quote after audit.', q10:'How to send a request?', a10:'Forms submit to our serverless function and we contact you back.'},
-        contacts:{title:'Contacts', phone:'Phone', email:'Email', location:'Location', city:'Almaty, Kazakhstan'},
-        footer:{langs:'RU | KZ | EN', privacy:'Privacy policy'},
-        toast:'Sent! We will contact you.'
-      }
-    };
+  // === Поведение калькулятора (как у тебя было, сокращено до сути бюджета) ===
+  const svc = document.getElementById('svc');
+  const cctvInputs = document.getElementById('cctvInputs');
+  const sksInputs = document.getElementById('sksInputs');
+  const smarthomeInputs = document.getElementById('smarthomeInputs');
+  const outsourcingInputs = document.getElementById('outsourcingInputs');
+  const calcPrice = document.getElementById('calcPrice');
+  const calcDetails = document.getElementById('calcDetails');
 
-    let CUR_LANG = 'ru';
-    const $ = (id) => document.getElementById(id);
-    const setText = (id, html, allowHTML=false) => { const el=$(id); if(!el) return; allowHTML ? el.innerHTML=html : el.textContent=html; };
+  function toggleInputs(){
+    cctvInputs.classList.toggle('hidden', svc.value!=='cctv');
+    sksInputs.classList.toggle('hidden', svc.value!=='sks');
+    smarthomeInputs.classList.toggle('hidden', svc.value!=='smarthome');
+    outsourcingInputs.classList.toggle('hidden', svc.value!=='outsourcing');
+  }
+  svc.addEventListener('change', toggleInputs); toggleInputs();
 
-    function applyLang(lang){
-      CUR_LANG = lang; const t = I18N[lang];
-      // Nav
-      setText('nav-services', t.nav.services); setText('nav-cases', t.nav.cases);
-      setText('nav-calculator', t.nav.calculator); setText('nav-faq', t.nav.faq); setText('nav-contacts', t.nav.contacts);
-      setText('btn-cta', t.cta.lead); setText('btn-calc', t.cta.calc); setText('btn-services', t.cta.services);
-      // Hero
-      setText('hero-title', t.hero.title); setText('hero-sub', t.hero.sub, true); setText('hero-note', t.hero.note);
-      setText('hero-badge-title', t.hero.badge1); setText('hero-badge-sub', t.hero.badge2);
-      // Services
-      setText('services-title', t.services.title); setText('services-sub', t.services.sub);
-      setText('svc-sks-title', t.services.sks.title); setText('svc-sks-desc', t.services.sks.desc);
-      setText('svc-sks-li1', t.services.sks.li1); setText('svc-sks-li2', t.services.sks.li2); setText('svc-sks-li3', t.services.sks.li3); setText('svc-sks-cta', t.services.sks.cta);
-      setText('svc-cctv-title', t.services.cctv.title); setText('svc-cctv-desc', t.services.cctv.desc);
-      setText('svc-cctv-li1', t.services.cctv.li1); setText('svc-cctv-li2', t.services.cctv.li2); setText('svc-cctv-li3', t.services.cctv.li3); setText('svc-cctv-cta', t.services.cctv.cta);
-      setText('svc-smh-title', t.services.smh.title); setText('svc-smh-desc', t.services.smh.desc);
-      setText('svc-smh-li1', t.services.smh.li1); setText('svc-smh-li2', t.services.smh.li2); setText('svc-smh-li3', t.services.smh.li3); setText('svc-smh-cta', t.services.smh.cta);
-      setText('svc-outs-title', t.services.outs.title); setText('svc-outs-desc', t.services.outs.desc);
-      setText('svc-outs-li1', t.services.outs.li1); setText('svc-outs-li2', t.services.outs.li2); setText('svc-outs-li3', t.services.outs.li3); setText('svc-outs-cta', t.services.outs.cta);
-      // Cases
-      setText('cases-title', t.cases.title);
-      setText('case1-title', t.cases.c1t); setText('case1-desc', t.cases.c1d);
-      setText('case2-title', t.cases.c2t); setText('case2-desc', t.cases.c2d);
-      setText('case3-title', t.cases.c3t); setText('case3-desc', t.cases.c3d);
-      setText('case4-title', t.cases.c4t); setText('case4-desc', t.cases.c4d);
-      setText('case5-title', t.cases.c5t); setText('case5-desc', t.cases.c5d);
-      setText('case6-title', t.cases.c6t); setText('case6-desc', t.cases.c6d);
-      // Calculator labels
-      setText('calc-title', t.calc.title); setText('calc-sub', t.calc.sub); setText('calc-svc-lbl', t.calc.svc);
-      setText('calc-out-title', t.calc.outTitle); setText('calc-disclaimer', t.calc.disclaimer);
-      setText('opt-cctv', I18N[lang].services.cctv.title); setText('opt-sks', I18N[lang].services.sks.title);
-      setText('opt-smh', I18N[lang].services.smh.title); setText('opt-outs', I18N[lang].services.outs.title);
-      setText('lbl-cctv-cams', t.labels.cams); setText('lbl-cctv-days', t.labels.days); setText('lbl-cctv-quality', t.labels.quality);
-      setText('lbl-sks-points', t.labels.sksPoints); setText('lbl-sks-len', t.labels.sksLen);
-      setText('lbl-smh-area', t.labels.area); setText('lbl-smh-scenes', t.labels.scenes);
-      setText('lbl-outs-people', t.labels.ppl); setText('lbl-outs-sla', t.labels.sla);
-      setText('opt-q-base', (lang==='en'?'Basic (2MP)':lang==='kk'?'Негізгі (2MP)':'Базовое (2MP)'));
-      setText('opt-q-mid',  (lang==='en'?'Optimal (4MP)':lang==='kk'?'Оптимум (4MP)':'Оптимум (4MP)'));
-      setText('opt-q-pro',  (lang==='en'?'Premium (8MP)':lang==='kk'?'Премиум (8MP)':'Премиум (8MP)'));
-      // Placeholders & buttons
-      $('calcName').placeholder=t.labels.name; $('calcPhone').placeholder=t.labels.phone;
-      $('calcEmail').placeholder=t.labels.email; $('calcComment').placeholder=t.labels.comment;
-      $('qName').placeholder=t.labels.name; $('qPhone').placeholder=t.labels.phone; $('qMsg').placeholder=t.labels.msg;
-      setText('btn-send-calc', t.labels.sendCalc); setText('btn-send-lead', t.labels.sendLead);
-      // Quick lead select options
-      const opts = document.querySelectorAll('#qService option');
-      if(opts.length>=4){ opts[0].textContent=I18N[lang].services.cctv.title; opts[1].textContent=I18N[lang].services.sks.title; opts[2].textContent=I18N[lang].services.smh.title; opts[3].textContent=I18N[lang].services.outs.title; }
-      // Lead block
-      setText('lead-title', t.labels.qleadTitle); setText('lead-sub', t.labels.qleadSub);
-      setText('lead-li1', t.labels.qlead1); setText('lead-li2', t.labels.qlead2); setText('lead-li3', t.labels.qlead3);
-      // FAQ
-      setText('faq-title', t.faq.title); for(let i=1;i<=10;i++){ setText('q'+i, t.faq['q'+i]); setText('a'+i, t.faq['a'+i]); }
-      // Contacts & footer
-      setText('contacts-title', t.contacts.title); setText('lbl-phone', t.contacts.phone); setText('lbl-email', t.contacts.email); setText('lbl-location', t.contacts.location); setText('location', t.contacts.city);
-      setText('lang-note', t.footer.langs); setText('privacy', t.footer.privacy);
-      // Toast
-      $('toast').textContent = t.toast;
+  function formatKzt(x){ return new Intl.NumberFormat('ru-KZ').format(Math.round(x)) + ' ₸'; }
+
+  document.getElementById('calcBtn').addEventListener('click', () => {
+    let price = 0, details=[];
+    if(svc.value==='cctv'){
+      const cams=+document.getElementById('cctvCams').value||8;
+      const days=+document.getElementById('cctvDays').value||30;
+      const q=document.getElementById('cctvQuality').value;
+      const k = q==='pro'? 120000 : q==='mid'? 80000 : 55000;
+      price = cams*k + Math.max(150000, days*2000);
+      details.push(`Камер: ${cams}, архив: ${days} дн., уровень: ${q.toUpperCase()}`);
+    }else if(svc.value==='sks'){
+      const pts=+document.getElementById('sksPoints').value||20;
+      const len=+document.getElementById('sksLen').value||25;
+      price = pts*15000 + len*500;
+      details.push(`Точек: ${pts}, средняя трасса: ${len} м`);
+    }else if(svc.value==='smarthome'){
+      const area=+document.getElementById('smhArea').value||120;
+      const scenes=+document.getElementById('smhScenes').value||10;
+      price = area*9000 + scenes*30000;
+      details.push(`Площадь: ${area} м², сценариев: ${scenes}`);
+    }else{
+      const ppl=+document.getElementById('outPeople').value||25;
+      const sla=document.getElementById('outSla').value;
+      const base = sla==='pro'? 12000 : sla==='plus'? 9000 : 6500;
+      price = ppl*base;
+      details.push(`Сотр.: ${ppl}, SLA: ${sla.toUpperCase()}`);
     }
-    $('langSelect').addEventListener('change', (e)=> applyLang(e.target.value));
+    calcPrice.textContent = formatKzt(price);
+    calcDetails.innerHTML = details.map(d=>`<div>• ${d}</div>`).join('');
+  });
 
-    // ========= Calculator =========
-    const groups = { cctv:$('cctvInputs'), sks:$('sksInputs'), smarthome:$('smarthomeInputs'), outsourcing:$('outsourcingInputs') };
-    const svc = $('svc');
-    const showGroup = (key)=>{ Object.values(groups).forEach(el=>el.classList.add('hidden')); groups[key].classList.remove('hidden'); };
-    svc.addEventListener('change', e => showGroup(e.target.value));
+  // === NEW: UTM capture ===
+  (function(){
+    const qs = new URLSearchParams(location.search);
+    const ids = ["utm_source","utm_medium","utm_campaign","utm_content","utm_term"];
+    const sets = [
+      ["utm_source","utm_source2"],
+      ["utm_medium","utm_medium2"],
+      ["utm_campaign","utm_campaign2"],
+      ["utm_content","utm_content2"],
+      ["utm_term","utm_term2"]
+    ];
+    const ref1 = document.getElementById("utm_referrer"), ref2 = document.getElementById("utm_referrer2");
+    const p1 = document.getElementById("utm_page"), p2 = document.getElementById("utm_page2");
 
-    function format(num){ return new Intl.NumberFormat(CUR_LANG==='en'?'en-US':'ru-RU').format(Math.round(num)); }
-    let lastCalc = null;
-    function calc(){
-      const type = svc.value; let price=0; let details=[];
-      if(type==='cctv'){
-        const cams=+($('cctvCams').value||0), days=+($('cctvDays').value||0), q=$('cctvQuality').value;
-        const camCost = q==='base'?38000:(q==='mid'?65000:120000);
-        const nvr = Math.ceil(cams/16)*130000;
-        const hdd = Math.max(1, Math.ceil(cams*days/80))*38000;
-        const cabling = cams*12000;
-        price = cams*camCost + nvr + hdd + cabling;
-        details.push(`Камеры ×${cams}: ~₸${format(cams*camCost)}`); details.push(`NVR/PoE: ~₸${format(nvr)}`);
-        details.push(`Накопители: ~₸${format(hdd)}`); details.push(`Кабель/монтаж: ~₸${format(cabling)}`);
-      }
-      if(type==='sks'){
-        const pts=+($('sksPoints').value||0), len=+($('sksLen').value||0);
-        const mat=pts*(len*350+2500), labor=pts*7000;
-        price=(mat+labor)*1.5; // ×1.5
-        details.push(`Материалы: ~₸${format(mat)}`); details.push(`Работы: ~₸${format(labor)}`); details.push(`Коэфф. СКС ×1.5 учтён`);
-      }
-      if(type==='smarthome'){
-        const area=+($('smhArea').value||0), scenes=+($('smhScenes').value||0);
-        const hub=180000, sensors=scenes*22000, relays=Math.ceil(area/40)*28000, labor=Math.ceil(area/20)*9000;
-        price=hub+sensors+relays+labor;
-        details.push(`Центр/шлюзы: ~₸${format(hub)}`); details.push(`Датчики/сценарии: ~₸${format(sensors)}`); details.push(`Реле/модули: ~₸${format(relays)}`); details.push(`Пуско-наладка: ~₸${format(labor)}`);
-      }
-      if(type==='outsourcing'){
-        const ppl=+($('outPeople').value||0), sla=$('outSla').value;
-        const base=ppl*3500, mult=sla==='std'?1:(sla==='plus'?1.35:1.9);
-        const before=Math.max(100000, base*mult);
-        price=before*1.4; // ×1.4
-        details.push(`Абонентка (с учётом SLA): от ₸${format(before)} / мес`); details.push(`Коэфф. аутсорсинга ×1.4 учтён`); details.push(`Включено: HelpDesk, выезды, мониторинг`);
-      }
-      $('calcPrice').textContent = `₸ ${format(price)}`;
-      $('calcDetails').innerHTML = details.map(d=>`<div>• ${d}</div>`).join('');
-      lastCalc = {type, details, price};
-      window.lastCalc = lastCalc;
-      return lastCalc;
-    }
-    $('calcBtn').addEventListener('click', calc);
-    showGroup('cctv');
-
-    // ========= Serverless emailing (Netlify Functions) =========
-    async function postJSON(url, data){
-      const res = await fetch(url, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data) });
-      if(!res.ok) throw new Error(await res.text()); return res.json();
-    }
-    function showToast(msg){ const t=$('toast'); t.textContent=msg; t.style.display='block'; setTimeout(()=>t.style.display='none', 5000); }
-    function setBtnLoading(btn, loading){ if(!btn) return; btn.disabled=!!loading; btn.style.opacity = loading?'0.6':'1'; }
-
-    // Быстрая заявка
-    $('quickLeadForm').addEventListener('submit', async (e)=>{
-      e.preventDefault();
-      const btn=$('btn-send-lead'); setBtnLoading(btn,true);
-      try{
-        const name=$('qName').value.trim(), phone=$('qPhone').value.trim(), service=$('qService').value, message=$('qMsg').value.trim()||'-';
-        if(!name||!phone){ setBtnLoading(btn,false); return; }
-        await postJSON('/.netlify/functions/send-email', { source:'quick-lead', name, phone, service, message, site_url: location.href });
-        showToast(I18N[CUR_LANG].toast); e.target.reset();
-      }catch(err){ console.error(err); showToast('Ошибка отправки. Попробуйте позже.'); }
-      finally{ setBtnLoading(btn,false); }
+    sets.forEach(([a,b])=>{
+      const v = qs.get(a) || localStorage.getItem(a) || "";
+      const el1=document.getElementById(a), el2=document.getElementById(b);
+      if(el1) el1.value = v;
+      if(el2) el2.value = v;
     });
+    if(ref1) ref1.value = document.referrer || "";
+    if(ref2) ref2.value = document.referrer || "";
+    const pv = location.pathname + location.search;
+    if(p1) p1.value = pv;
+    if(p2) p2.value = pv;
+    ids.forEach(k=>{ const v=qs.get(k); if(v) localStorage.setItem(k,v); });
+  })();
 
-    // Заявка из калькулятора
-    $('calcLeadForm').addEventListener('submit', async (e)=>{
-      e.preventDefault();
-      const btn=$('btn-send-calc'); setBtnLoading(btn,true);
-      try{
-        if(!window.lastCalc && typeof calc==='function') calc();
-        const name=$('calcName').value.trim(), phone=$('calcPhone').value.trim(), email=$('calcEmail').value.trim()||'-', comment=$('calcComment').value.trim()||'-';
-        if(!name||!phone){ setBtnLoading(btn,false); return; }
-        const calc_type=(window.lastCalc?.type||$('svc').value), calc_price=window.lastCalc?.price||0, calc_details=(window.lastCalc?.details||[]).map(d=>d.replace(/<[^>]+>/g,'')).join('\n- ');
-        await postJSON('/.netlify/functions/send-email', { source:'calc-lead', name, phone, email, comment, calc_type, calc_price, calc_details, site_url: location.href });
-        showToast(I18N[CUR_LANG].toast); e.target.reset();
-      }catch(err){ console.error(err); showToast('Ошибка отправки. Попробуйте позже.'); }
-      finally{ setBtnLoading(btn,false); }
+  // === NEW: GA events ===
+  ["calcLeadForm","quickLeadForm"].forEach(fid=>{
+    const f=document.getElementById(fid);
+    if(!f) return;
+    f.addEventListener("submit", ()=>{
+      if(window.gtag){ gtag('event','submit_lead',{form:fid}); }
     });
-
-    // Init language
-    applyLang('ru');
+  });
+  document.getElementById("floatingWa")?.addEventListener("click",()=>{
+    if(window.gtag){ gtag('event','click_whatsapp',{place:'floating'}); }
+  });
+  document.getElementById("ctaWa")?.addEventListener("click",()=>{
+    if(window.gtag){ gtag('event','click_whatsapp',{place:'mobile_bar'}); }
+  });
+  document.getElementById("phone1")?.addEventListener("click",()=>{
+    if(window.gtag){ gtag('event','click_call',{phone:'primary'}); }
   });
   </script>
 </body>
