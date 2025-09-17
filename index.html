@@ -3,43 +3,45 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Primary SEO -->
   <title>IT Solutions — СКС, видеонаблюдение, умный дом, IT-аутсорсинг (Алматы)</title>
-  <meta name="description" content="Проектирование, внедрение и поддержка инфраструктуры: СКС, видеонаблюдение, системы безопасности, умный дом, IT-аутсорсинг. Алматы и область. Бесплатный аудит."/>
+  <meta name="description" content="Проектирование, внедрение и поддержка инфраструктуры: СКС, видеонаблюдение, системы безопасности, умный дом, IT-аутсорсинг. Алматы и область. Бесплатный аудит.">
+  <link rel="canonical" href="https://infotechsolutions.netlify.app/">
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
+
+  <!-- Icons / PWA (опционально, но полезно) -->
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <meta name="theme-color" content="#0F172A"/>
+
   <!-- Open Graph -->
-  <meta property="og:title" content="IT Solutions — инфраструктура под ключ"/>
-  <meta property="og:description" content="СКС, видеонаблюдение, умный дом, IT-аутсорсинг. Алматы и область."/>
-  <meta property="og:type" content="website"/>
-  <meta property="og:url" content="https://infotechsolutions.netlify.app/"/>
-  <meta property="og:image" content="/og-preview.png"/>
-  <!-- JSON-LD -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "IT Solutions (Information Technology Service)",
-    "address": {"@type": "PostalAddress", "addressLocality": "Алматы", "addressCountry": "KZ"},
-    "contactPoint": [
-      {"@type":"ContactPoint","telephone":"+7 778 349 01 49","contactType":"customer service"},
-      {"@type":"ContactPoint","telephone":"+7 707 270 08 65","contactType":"customer service"}
-    ],
-    "email": "info@itsolutions.team",
-    "url": "https://infotechsolutions.netlify.app/",
-    "areaServed": ["Алматы", "Алматинская область"],
-    "priceRange": "₸₸",
-    "openingHours": "Mo-Sa 09:00-20:00"
-  }
-  </script>
-  <!-- Tailwind -->
+  <meta property="og:title" content="IT Solutions — инфраструктура под ключ">
+  <meta property="og:description" content="СКС, видеонаблюдение, умный дом, IT-аутсорсинг. Алматы и область.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://infotechsolutions.netlify.app/">
+  <meta property="og:image" content="/og-preview.png">
+  <meta property="og:site_name" content="IT Solutions">
+  <meta property="og:locale" content="ru_RU">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="IT Solutions — инфраструктура под ключ">
+  <meta name="twitter:description" content="СКС, видеонаблюдение, умный дом, IT-аутсорсинг. Алматы и область.">
+  <meta name="twitter:image" content="/og-preview.png">
+
+  <!-- Tailwind + Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: { extend: { colors: { brand: { primary: '#37b6ff', accent: '#7effa0' } } } }
     }
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Styles (поправлены значения rgba/теней) -->
   <style>
     html { scroll-behavior: smooth; }
     body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans"; }
@@ -49,7 +51,52 @@
     .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,1px,1px); white-space:nowrap; border:0; }
     .toast { position: fixed; right: 1rem; bottom: 1rem; background: #0b1220; color: #e5e7eb; border: 1px solid rgba(255,255,255,.08); padding: .75rem 1rem; border-radius: .75rem; box-shadow: 0 10px 30px rgba(0,0,0,.3); display:none; z-index:60; }
   </style>
+
+  <!-- JSON-LD: LocalBusiness (расширено) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "IT Solutions (Information Technology Service)",
+    "image": "https://infotechsolutions.netlify.app/og-preview.png",
+    "url": "https://infotechsolutions.netlify.app/",
+    "logo": "https://infotechsolutions.netlify.app/og-preview.png",
+    "telephone": "+7 778 349 01 49",
+    "email": "info@itsolutions.team",
+    "address": {"@type":"PostalAddress","addressLocality":"Алматы","addressCountry":"KZ"},
+    "areaServed": ["Алматы","Алматинская область"],
+    "priceRange": "₸₸",
+    "openingHoursSpecification": [{
+      "@type":"OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+      "opens":"09:00","closes":"20:00"
+    }],
+    "contactPoint": [{
+      "@type":"ContactPoint","telephone":"+7 778 349 01 49","contactType":"customer service","availableLanguage":["ru","kk","en"]
+    },{
+      "@type":"ContactPoint","telephone":"+7 707 270 08 65","contactType":"customer service","availableLanguage":["ru","kk","en"]
+    }]
+  }
+  </script>
+
+  <!-- JSON-LD: WebSite + SearchAction -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebSite",
+    "name":"IT Solutions",
+    "url":"https://infotechsolutions.netlify.app/",
+    "inLanguage":"ru",
+    "potentialAction":{
+      "@type":"SearchAction",
+      "target":"https://infotechsolutions.netlify.app/?q={search_term_string}",
+      "query-input":"required name=search_term_string"
+    }
+  }
+  </script>
 </head>
+
+
 <body class="bg-slate-900 text-slate-100">
   <!-- Header -->
   <header class="sticky top-0 z-50 glass">
@@ -598,5 +645,16 @@
     applyLang('ru');
   });
   </script>
+  <script>
+    (function(){
+      var htmlEl = document.documentElement;
+      var select = document.getElementById('langSelect');
+      if (select && htmlEl) {
+        htmlEl.setAttribute('lang', select.value || 'ru');
+        select.addEventListener('change', function(){ htmlEl.setAttribute('lang', select.value || 'ru'); });
+      }
+    })();
+  </script>
+
 </body>
 </html>
